@@ -49,6 +49,12 @@
     <Filter Include="Header Files\Geometry">
       <UniqueIdentifier>{46401e0c-6a9d-4679-8fbc-fd982ff0d583}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scene">
+      <UniqueIdentifier>{cbe69192-db30-4844-9ef7-580d05099763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{4355916a-e5b3-4713-b853-516f66c7682e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lamp.hpp">
@@ -58,12 +64,6 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="LampEngine.hpp">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="LampNode.hpp">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="LampScene.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="SDLWrapper.h">
@@ -99,6 +99,18 @@
     <ClInclude Include="LampMesh.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="LampCamera.hpp">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="LampTransform.hpp">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="LampScene.hpp">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="LampGameObject.hpp">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -124,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="LampMesh.cpp">
       <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="LampScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="LampGameObject.cpp">
+      <Filter>Source Files\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

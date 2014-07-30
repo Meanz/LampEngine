@@ -6,7 +6,8 @@ m_pApplication(pApplication),
 m_config(config),
 m_pAssetManager(new LampAssetManager()),
 m_pWindow(new LampWindow(config.width, config.height, config.title)),
-m_pRenderer(new LampRenderer())
+m_pRenderer(new LampRenderer()),
+m_pScene(new LampScene())
 {
 	//Create our SDLWrapper
 	SDLConfig _config;
@@ -74,7 +75,7 @@ void LampEngine::loop()
 		while (GetTickCount64() > nextTick && loops < MAX_FRAME_SKIP)
 		{
 			//Send updates to the scene and all the components that requires it
-			//m_pScene->onTick();
+			m_pScene->onTick();
 			m_pApplication->onTick();
 
 			nextTick += SKIP_TICKS;
@@ -92,15 +93,11 @@ void LampEngine::loop()
 		//Tell the application that we are about to draw a frame
 		m_pApplication->onPreFrame();
 
-		//Tell the renderer we are rendering!
-		m_pRenderer->render();
-
 		//Tell the scene we are rendering
-
+		m_pScene->onFrame();
 
 		//Tell the application that a frame is happening
 		m_pApplication->onFrame();
-
 
 		//Tell the application that a frame is ready to be sent to the screen 
 		m_pApplication->onPostFrame();

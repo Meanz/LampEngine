@@ -77,8 +77,9 @@
     <ClInclude Include="LampAssetManager.hpp" />
     <ClInclude Include="Lamp.hpp" />
     <ClInclude Include="LampApplication.hpp" />
+    <ClInclude Include="LampCamera.hpp" />
     <ClInclude Include="LampEngine.hpp" />
-    <ClInclude Include="LampNode.hpp" />
+    <ClInclude Include="LampGameObject.hpp" />
     <ClInclude Include="LampPrefix.hpp" />
     <ClInclude Include="LampRenderer.hpp" />
     <ClInclude Include="LampScene.hpp" />
@@ -90,12 +91,15 @@
     <ClInclude Include="SDLWrapper.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="LampTransform.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LampAssetManager.cpp" />
     <ClCompile Include="Lamp.cpp" />
     <ClCompile Include="LampEngine.cpp" />
+    <ClCompile Include="LampGameObject.cpp" />
     <ClCompile Include="LampRenderer.cpp" />
+    <ClCompile Include="LampScene.cpp" />
     <ClCompile Include="LampTexture.cpp" />
     <ClCompile Include="LampMesh.cpp" />
     <ClCompile Include="SDLWrapper.cpp" />

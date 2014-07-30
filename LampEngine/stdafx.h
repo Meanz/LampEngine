@@ -26,7 +26,16 @@
 #include <assert.h>
 
 //OpengGL Mathematics (GLM)(v0.9.5.2)
+#define GLM_FORCE_RADIANS
 #include <glm.hpp>
+#include <gtc/quaternion.hpp>
+#include <gtc/matrix_transform.hpp>
+
+//Include types
+#include "LampTypes.hpp"
+
+//Our transformation ckass
+#include "LampTransform.hpp"
 
 //A configuration structure for the lamp engine
 struct LampConfig {
@@ -48,8 +57,7 @@ struct LampConfig {
 
 };
 
-//Include types
-#include "LampTypes.hpp"
+
 
 //Main thingy, it will include the rest, yeyes
 #include "Lamp.hpp"

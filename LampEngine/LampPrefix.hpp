@@ -8,10 +8,12 @@ typedef LampConfig Config;
 
 //Scene Components
 typedef LampScene Scene;
-//typedef LampGameObject GameObject;
+typedef LampGameObject GameObject;
+typedef LampMeshRenderer MeshRenderer;
 
 //Components
 typedef LampColor Color;
+typedef LampTransform Transform;
 
 //Geometry Components
 //typedef LampMesh Mesh;
