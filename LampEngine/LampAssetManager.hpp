@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include "LampTexture.hpp"
+#include "LampShader.hpp"
 
 namespace LampProject
 {
@@ -30,6 +31,9 @@ namespace LampProject
 
 		//Load's a texture from the given file path and stores it with the given id
 		LampTexture* loadTexture(std::string textureId, std::string textureFilePath);
+
+		//Load a shader program from the given .lshader file
+		LampShaderProgram* loadShaderProgram(std::string shaderId, std::string shaderProgramPath);
 
 	};
 

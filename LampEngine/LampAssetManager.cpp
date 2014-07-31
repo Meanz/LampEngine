@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LampAssetManager.hpp"
 #include "LampTextureLoader.hpp"
+#include "LampShaderParser.hpp"
 
 LampAssetManager::LampAssetManager() :
 m_texIdCounter(0)
@@ -34,20 +35,12 @@ LampTexture* LampAssetManager::getTexture(std::string textureId)
 
 LampTexture* LampAssetManager::loadTexture(std::string textureFilePath)
 {
-	LampTexture* pTexture = LampTextureLoader::loadTexture(textureFilePath);
-	if (pTexture > 0) 
-	{
-		//Generate id for the texture
-		int id;
-		for (id = 0; getTexture("tex_" + id) != NULL; id = m_texIdCounter++);
-		textures["tex_" + id] = pTexture;
-		pTexture->m_id = "tex_" + id;
-		return pTexture;
-	}
-	else 
-	{
-		return NULL;
-	}
+	//Generate id for the texture
+	int id;
+	for (id = 0; getTexture("tex_" + id) != NULL; id = m_texIdCounter++);
+
+	//Load the texture
+	return loadTexture("tex_" + id, textureFilePath);
 }
 
 LampTexture* LampAssetManager::loadTexture(std::string textureId, std::string textureFilePath)
@@ -67,4 +60,17 @@ LampTexture* LampAssetManager::loadTexture(std::string textureId, std::string te
 		return NULL;
 	}
 	
+}
+
+LampShaderProgram* LampAssetManager::loadShaderProgram(std::string shaderId, std::string shaderFilePath)
+{
+	bool didComplete = false;
+	LampShaderParser* pParser = new LampShaderParser(shaderFilePath);
+
+	if (pParser.parse())
+	{
+		//Do some stuff!
+	}
+
+	delete pParser;
 }

@@ -4,8 +4,12 @@
 LampEngine::LampEngine(LampApplication* pApplication, LampConfig config) :
 m_pApplication(pApplication),
 m_config(config),
-m_pWindow(new LampWindow(config.width, config.height, config.title)),
-m_isRunning(false)
+m_isRunning(false),
+m_pAssetManager(0),
+m_pRenderer(0),
+m_pScene(0),
+m_pInput(0),
+m_pWindow(0)
 {
 	//Create our SDLWrapper
 	SDLConfig _config;
@@ -21,6 +25,9 @@ m_isRunning(false)
 //Cuz we have to, rite?
 void LampEngine::postConstructor()
 {
+	//Initialization order is important
+	//These components depend on each other!
+	m_pWindow = (new LampWindow(m_config.width, m_config.height, m_config.title, m_pWrapper->getWindow()));
 	m_pAssetManager = (new LampAssetManager());
 	m_pRenderer = (new LampRenderer());
 	m_pScene = (new LampScene());
@@ -89,9 +96,6 @@ void LampEngine::loop()
 		loops = 0;
 		while (GetTickCount64() > nextTick && loops < MAX_FRAME_SKIP)
 		{
-			//Poll input
-			m_pInput->pollInput();
-
 			//Send updates to the scene and all the components that requires it
 			m_pScene->onTick();
 			m_pApplication->onTick();
@@ -107,6 +111,8 @@ void LampEngine::loop()
 			//Tell someone about this.
 		}
 
+		//Poll input
+		m_pInput->pollInput();
 
 		//Tell the application that we are about to draw a frame
 		m_pApplication->onPreFrame();

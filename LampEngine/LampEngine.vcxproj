@@ -84,9 +84,12 @@
     <ClInclude Include="LampPrefix.hpp" />
     <ClInclude Include="LampRenderer.hpp" />
     <ClInclude Include="LampScene.hpp" />
+    <ClInclude Include="LampShader.hpp" />
+    <ClInclude Include="LampShaderParser.hpp" />
     <ClInclude Include="LampTexture.hpp" />
     <ClInclude Include="LampTextureLoader.hpp" />
     <ClInclude Include="LampTypes.hpp" />
+    <ClInclude Include="LampUtil.hpp" />
     <ClInclude Include="LampWindow.hpp" />
     <ClInclude Include="LampMesh.hpp" />
     <ClInclude Include="LampLua.hpp" />
@@ -101,10 +104,14 @@
     <ClCompile Include="LampCamera.cpp" />
     <ClCompile Include="LampEngine.cpp" />
     <ClCompile Include="LampGameObject.cpp" />
+    <ClCompile Include="LampInput.cpp" />
     <ClCompile Include="LampRenderer.cpp" />
     <ClCompile Include="LampScene.cpp" />
+    <ClCompile Include="LampShader.cpp" />
+    <ClCompile Include="LampShaderParser.cpp" />
     <ClCompile Include="LampTexture.cpp" />
     <ClCompile Include="LampMesh.cpp" />
+    <ClCompile Include="LampUtil.cpp" />
     <ClCompile Include="SDLWrapper.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

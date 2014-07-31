@@ -17,7 +17,7 @@ void LampCamera::perspective(float fovY = 60.0f, float aspect = Lamp::getWindow(
 	m_projectionMatrix = glm::perspective(glm::radians(fovY), aspect, zNear, zFar);
 }
 
-void LampCamera::ortho2D(float left = 0, float right = Lamp::getWindow().getWidth(), float bottom = Lamp::getWindow().getHeight() , float top = 0)
+void LampCamera::ortho2D(float left = 0, float right = Lamp::getWindow().getWidth(), float bottom = Lamp::getWindow().getHeight(), float top = 0)
 {
 	m_projectionMatrix = glm::ortho(left, right, bottom, top);
 }
@@ -73,12 +73,13 @@ void LampFreeCamera::calculateForward()
 void LampFreeCamera::onCameraUpdate()
 {
 	//Process mouse info
-	int dx = Lamp::getInput().getMouseDX();
-	int dy = Lamp::getInput().getMouseDY();
-
-	rotation.x += dy * 0.01f;
-	rotation.y += dx * 0.01f; //Some weird value :D
-
+	if (Lamp::getInput().isMouseCentered())
+	{
+		int dx = -Lamp::getInput().getMouseDX();
+		int dy = Lamp::getInput().getMouseDY();
+		rotation.x += dy * 0.1f;
+		rotation.y += dx * 0.1f; //Some weird value :D
+	}
 	//update our view matrix!
 	calculateForward();
 

@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{b2c4d897-2061-4ec9-935e-247139c82bd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{21ad3daa-39ca-4ab6-be89-745025186b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{e462e276-c578-45ab-9bec-0b3b0570ea75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lamp.hpp">
@@ -123,6 +129,15 @@
     <ClInclude Include="LampLua.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="LampShader.hpp">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="LampUtil.hpp">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="LampShaderParser.hpp">
+      <Filter>Header Files\Asset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -157,6 +172,18 @@
     </ClCompile>
     <ClCompile Include="LampCamera.cpp">
       <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="LampInput.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="LampShader.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="LampUtil.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="LampShaderParser.cpp">
+      <Filter>Source Files\Asset</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

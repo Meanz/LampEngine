@@ -25,12 +25,20 @@
 //For asserting
 #include <assert.h>
 
+//SDL
+#include <SDL.h>
+#include <SDL_opengl.h>
+#include <SDL_image.h>
+
 //OpengGL Mathematics (GLM)(v0.9.5.2)
 #define GLM_FORCE_RADIANS
 #include <glm.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
+
+//Utility class
+#include "LampUtil.hpp"
 
 //Include types
 #include "LampTypes.hpp"

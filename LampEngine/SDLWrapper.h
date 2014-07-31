@@ -2,9 +2,6 @@
 
 //SDL
 #include "stdafx.h"
-#include <SDL.h>
-#include <SDL_opengl.h>
-#include <SDL_image.h>
 
 namespace LampProject {
 
@@ -28,6 +25,8 @@ namespace LampProject {
 	public:
 		SDLWrapper(SDLConfig config);
 		~SDLWrapper();
+
+		SDL_Window* getWindow();
 
 		bool init();
 

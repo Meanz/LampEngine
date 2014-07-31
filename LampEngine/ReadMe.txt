@@ -1,37 +1,28 @@
 ========================================================================
-    STATIC LIBRARY : LampEngine Project Overview
+    LampEngine Project Overview
 ========================================================================
 
-AppWizard has created this LampEngine library project for you.
+Basically just a simple hobby 3D Engine using techniques I've learned so far.
+If you want to build / or try it, I suggest you send me an e-mail ( steffene92@gmail.com ).
 
-This file contains a summary of what you will find in each of the files that
-make up your LampEngine application.
+Planned features:
+* Lua Embedding
+* Realtime resource editing ( eg, edit shaders/models/textures realtime ).
+	This will be done by using the OS onFileChanged events, and then the engine will just reload the asset.
+	There will be an asset manager that tracks all assets, making this feature a possibility.
+* Shadows
+	I will be trying to implement the Variance Shadow Mapping technique
+	thebennybox has some nice information describing the technique and it's implementation
+	https://www.youtube.com/user/thebennybox (I will be using some tips and tricks learned here)
 
+* Defered Rendering
+	I plan to implement this rendering technique and to play with it's capabilities.
+	Not sure if I am going to add a second renderer for Forward Rendering, I don't think that should be to hard
+	since most of the actions that Defered Rendering does is just shaders.
 
-LampEngine.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+* Screen Space Ambient Occlusion ( SSAO )
+	I really like how SSAO can change the feel of a scene, so I will be having a go at this.
+	To be honest, I haven't really looked much at how AO in general works, but I'll find that out!
 
-LampEngine.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
-
-
-/////////////////////////////////////////////////////////////////////////////
-
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named LampEngine.pch and a precompiled types file named StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////
+I will be adding/removing information here as time progresses.
+I might be posting some progress videos on youtube or something, I don't know just yet.

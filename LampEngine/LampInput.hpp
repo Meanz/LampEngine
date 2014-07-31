@@ -85,154 +85,40 @@ namespace LampProject
 		int m_deltaMouseX;
 		int m_deltaMouseY;
 
+		bool m_centerMouse;
+		bool m_ignoreNextMouseMotion;
+
 	public:
 
-		LampInput()
-		{
-			for (unsigned int i = 0; i < MAX_MOUSE_BUTTONS; i++)
-			{
-				m_bMouseButtons[i] = false;
-			}
-			resetKeys();
-		}
+		LampInput();
 
-		~LampInput()
-		{
+		~LampInput();
 
-		}
+		bool isMouseCentered();
 
-		void resetKeys()
-		{
-			for (unsigned int i = 0; i < MAX_VIRTUAL_KEYS; i++)
-			{
-				m_bKeys[i] = false;
-			}
-		}
+		void setCenterMouse(bool centerMouse);
 
-		void addMouseListener(LampMouseListener* pListener)
-		{
-			m_vMouseListeners.push_back(pListener);
-		}
+		void resetKeys();
 
-		void addKeyListener(LampKeyListener* pKeyListener)
-		{
-			m_vKeyListeners.push_back(pKeyListener);
-		}
+		void addMouseListener(LampMouseListener* pListener);
 
-		int getMouseX() 
-		{
-			return m_lastMouseX;
-		}
+		void addKeyListener(LampKeyListener* pKeyListener);
 
-		int getMouseY()
-		{
-			return m_lastMouseY;
-		}
+		int getMouseX();
 
-		int getMouseDX()
-		{
-			return m_deltaMouseX;
-		}
+		int getMouseY();
 
-		int getMouseDY()
-		{
-			return m_deltaMouseY;
-		}
+		int getMouseDX();
 
-		bool isKeyPressed(int vKey) 
-		{
-			if (m_vKeysPressed.size() == 0) return false;
-			for (unsigned int i = 0; i < m_vKeysPressed.size(); i++)
-			{
-				if (m_vKeysPressed[i] == vKey) return true;
-			}
-			return false;
-		}
+		int getMouseDY();
 
-		bool isKeyReleased(int vKey)
-		{
-			if (m_vKeysReleased.size() == 0) return false;
-			for (unsigned int i = 0; i < m_vKeysReleased.size(); i++)
-			{
-				if (m_vKeysReleased[i] == vKey) return true;
-			}
-			return false;
-		}
+		bool isKeyPressed(int vKey);
 
-		bool isKeyDown(int vKey)
-		{
-			if (vKey >= MAX_VIRTUAL_KEYS) return false;
-			return m_bKeys[vKey];
-		}
+		bool isKeyReleased(int vKey);
 
-		void pollInput()
-		{
-			//Calculate DX and DY
-			//Just do it, okay.
-			int x = 0, y = 0;
-			SDL_GetMouseState(&x, &y);
+		bool isKeyDown(int vKey);
 
-			//TODO: Revise solution
-			m_deltaMouseX = m_lastMouseX - x;
-			m_deltaMouseY = m_lastMouseY - y;
-			m_lastMouseX = x;
-			m_lastMouseY = y;
-
-			//Clear old states
-			m_vKeysPressed.clear();
-			m_vKeysReleased.clear();
-
-			//SDL_CHECKS
-			SDL_Event event;
-
-			while (SDL_PollEvent(&event) != 0)
-			{
-				if (event.type == SDL_QUIT)
-				{
-					//Hehe
-				}
-				else if (event.type == SDL_TEXTINPUT)
-				{
-				}
-				else if (event.type == SDL_KEYDOWN)
-				{
-					int vKey = event.key.keysym.sym;
-					m_vKeysPressed.push_back(vKey);
-					m_bKeys[vKey] = true;
-				}
-				else if (event.type == SDL_KEYUP)
-				{
-					int vKey = event.key.keysym.sym;
-					m_vKeysReleased.push_back(vKey);
-					m_bKeys[vKey] = false;
-				}
-				else if (event.type == SDL_MOUSEBUTTONDOWN)
-				{
-
-				}
-				else if (event.type == SDL_MOUSEBUTTONUP)
-				{
-
-				}
-				else if (event.type == SDL_MOUSEMOTION)
-				{
-					LampMouseEvent _event;
-
-					_event.mouseX = event.motion.x;
-					_event.mouseY = event.motion.y;
-					_event.deltaX = m_deltaMouseX;
-					_event.deltaY = m_deltaMouseY;
-
-					for (unsigned int i = 0; i < m_vMouseListeners.size(); i++)
-					{
-						m_vMouseListeners[i]->onMouseMove(_event);
-					}
-				}
-			}
-
-			//Process input updates
-
-		}
+		void pollInput();
 
 	};
 }

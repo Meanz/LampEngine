@@ -15,6 +15,11 @@ SDLWrapper::~SDLWrapper()
 	SDL_Quit();
 }
 
+SDL_Window* SDLWrapper::getWindow()
+{
+	return m_pWindow;
+}
+
 void SDLWrapper::swapBuffers()
 {
 	SDL_GL_SwapWindow(m_pWindow);
