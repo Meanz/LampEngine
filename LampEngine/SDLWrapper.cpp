@@ -11,6 +11,8 @@ m_config(config)
 SDLWrapper::~SDLWrapper()
 {
 
+	IMG_Quit();
+	SDL_Quit();
 }
 
 void SDLWrapper::swapBuffers()

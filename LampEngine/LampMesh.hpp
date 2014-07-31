@@ -18,7 +18,7 @@ namespace LampProject
 		vec3* positions;
 		vec3* normals;
 		vec2* uvs;
-		GLuint* indices;
+		uint32_t* indices;
 		int numIndices;
 		int numVertices;
 
@@ -33,14 +33,15 @@ namespace LampProject
 
 		~LampMeshData()
 		{
+			/*
 			if (positions > 0)
-				delete positions;
+				delete[] positions;
 			if (normals > 0)
-				delete normals;
+				delete[] normals;
 			if (uvs > 0)
-				delete uvs;
+				delete[] uvs;
 			if (indices > 0)
-				delete indices;
+				delete[] indices;*/
 		}
 	};
 

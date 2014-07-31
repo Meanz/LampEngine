@@ -4,10 +4,8 @@
 LampEngine::LampEngine(LampApplication* pApplication, LampConfig config) :
 m_pApplication(pApplication),
 m_config(config),
-m_pAssetManager(new LampAssetManager()),
 m_pWindow(new LampWindow(config.width, config.height, config.title)),
-m_pRenderer(new LampRenderer()),
-m_pScene(new LampScene())
+m_isRunning(false)
 {
 	//Create our SDLWrapper
 	SDLConfig _config;
@@ -20,16 +18,37 @@ m_pScene(new LampScene())
 	m_pWrapper = new SDLWrapper(_config);
 }
 
+//Cuz we have to, rite?
+void LampEngine::postConstructor()
+{
+	m_pAssetManager = (new LampAssetManager());
+	m_pRenderer = (new LampRenderer());
+	m_pScene = (new LampScene());
+	m_pInput = (new LampInput());
+
+	//Try to access our init lua!
+	Lamp::get().getLua().doFile("./data/lua/init.lua");
+}
+
 LampEngine::~LampEngine()
 {
+	//Destroy the SDLWrapper in the end
+	//SDLWrapper.destroy();
+
 	//Delete the asset manager, which in turn will delete the assets
 	delete m_pAssetManager;
 	delete m_pWindow;
 	delete m_pRenderer;
+	delete m_pScene;
+	delete m_pInput;
+	delete m_pWrapper;
+
+	Lamp::onEngineQuit();
 }
 
 void LampEngine::start()
 {
+	m_isRunning = true;
 	//SDLWrapper.startLoop(this);
 
 	if (m_pWrapper->init())
@@ -44,15 +63,11 @@ void LampEngine::start()
 
 void LampEngine::stop()
 {
-
-	//Destroy the SDLWrapper in the end
-	//SDLWrapper.destroy();
+	m_isRunning = false;
 }
 
 void LampEngine::loop()
 {
-	//Main loop flag
-	bool quit = false;
 
 	//Event handler
 	//SDL_Event e;
@@ -63,17 +78,20 @@ void LampEngine::loop()
 	const int TICKS_PER_SECOND = m_config.targetUpdatesPerSecond;
 	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
 	const int MAX_FRAME_SKIP = 100;
-	
+
 	DWORD64 nextTick = GetTickCount64();
 
 	//While application is running
 	int loops;
-	while (!quit)
+	while (m_isRunning)
 	{
 
 		loops = 0;
 		while (GetTickCount64() > nextTick && loops < MAX_FRAME_SKIP)
 		{
+			//Poll input
+			m_pInput->pollInput();
+
 			//Send updates to the scene and all the components that requires it
 			m_pScene->onTick();
 			m_pApplication->onTick();
@@ -83,13 +101,13 @@ void LampEngine::loop()
 		}
 
 		//check if the game has frozen
-		if (loops == MAX_FRAME_SKIP) 
+		if (loops == MAX_FRAME_SKIP)
 		{
 			//Game has frozen? 
 			//Tell someone about this.
 		}
 
-		
+
 		//Tell the application that we are about to draw a frame
 		m_pApplication->onPreFrame();
 

@@ -10,6 +10,10 @@ typedef glm::mat3 mat3;
 typedef glm::mat4 mat4;
 typedef glm::quat quat;
 
+#define UNIT_X vec3(1.0f, 0.0f, 0.0f)
+#define UNIT_Y vec3(0.0f, 1.0f, 0.0f)
+#define UNIT_Z vec3(0.0f, 0.0f, 1.0f)
+
 //Some static colors
 #define RED LampColor(1.0f, 0.0f, 0.0f)
 #define GREEN LampColor(0.0f, 1.0f, 0.0f)

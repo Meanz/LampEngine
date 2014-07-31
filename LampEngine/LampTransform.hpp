@@ -44,6 +44,16 @@ namespace LampProject
 			return global;
 		}
 
+		vec3 getPosition()
+		{
+			return position;
+		}
+
+		void setPosition(vec3 _position)
+		{
+			position = _position;
+		}
+
 		//Translate this Transform by the given values
 		void translate(float x, float y, float z)
 		{

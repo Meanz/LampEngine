@@ -18,7 +18,7 @@ namespace LampProject
 		~LampRenderer();
 
 		//Calls the render function!
-		void render();
+		void render(LampGameObject* pRenderNode);
 
 	};
 

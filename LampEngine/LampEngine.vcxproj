@@ -40,8 +40,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Projects\C++\3rdparty\glm;D:\Projects\C++\3rdparty\sdl\include;D:\Projects\C++\3rdparty\glew-1.10.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Projects\C++\3rdparty\sdl\lib\x86;D:\Projects\C++\3rdparty\glew-1.10.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Projects\C++\3rdparty\glm;D:\Projects\C++\3rdparty\sdl\include;D:\Projects\C++\3rdparty\glew-1.10.0\include;D:\Projects\C++\Lua\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Projects\C++\3rdparty\sdl\lib\x86;D:\Projects\C++\3rdparty\glew-1.10.0\lib\Release\Win32;D:\Projects\C++\LampEngine\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -80,6 +80,7 @@
     <ClInclude Include="LampCamera.hpp" />
     <ClInclude Include="LampEngine.hpp" />
     <ClInclude Include="LampGameObject.hpp" />
+    <ClInclude Include="LampInput.hpp" />
     <ClInclude Include="LampPrefix.hpp" />
     <ClInclude Include="LampRenderer.hpp" />
     <ClInclude Include="LampScene.hpp" />
@@ -88,6 +89,7 @@
     <ClInclude Include="LampTypes.hpp" />
     <ClInclude Include="LampWindow.hpp" />
     <ClInclude Include="LampMesh.hpp" />
+    <ClInclude Include="LampLua.hpp" />
     <ClInclude Include="SDLWrapper.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -96,6 +98,7 @@
   <ItemGroup>
     <ClCompile Include="LampAssetManager.cpp" />
     <ClCompile Include="Lamp.cpp" />
+    <ClCompile Include="LampCamera.cpp" />
     <ClCompile Include="LampEngine.cpp" />
     <ClCompile Include="LampGameObject.cpp" />
     <ClCompile Include="LampRenderer.cpp" />

@@ -1,6 +1,10 @@
 #pragma once
 
 #include "LampEngine.hpp"
+#include "LampLua.hpp"
+
+#include <stdio.h>
+#include <iostream>
 
 namespace LampProject {
 
@@ -24,8 +28,9 @@ namespace LampProject {
 
 		//Reference to our engine
 		LampEngine* m_pEngine;
+		LampLua* m_pLua;
 
-		Lamp() : m_pEngine(0) {};
+		Lamp() : m_pEngine(0), m_pLua(0) {};
 		Lamp(Lamp const&);
 		void operator=(Lamp const&);
 
@@ -48,8 +53,12 @@ namespace LampProject {
 			assert(internal_get().m_pEngine == 0);
 			assert(pApplication > 0);
 
+			//Create our lua object!
+			internal_get().m_pLua = new LampLua();
 
+			//Create our engine object
 			internal_get().m_pEngine = new LampEngine(pApplication, config);
+			internal_get().m_pEngine->postConstructor(); //Will do work!
 		}
 
 		//Starts the engine
@@ -64,6 +73,28 @@ namespace LampProject {
 			getEngine().stop(); //Will throw if the engine has not been initialized
 		}
 
+		static void onEngineQuit()
+		{
+			printf("Engine shutdown.");
+			
+			std::cin.get();
+
+			//Delete engine and lua?
+			delete internal_get().m_pLua;
+			delete internal_get().m_pEngine;
+		}
+
+		static LampLua& getLua() 
+		{
+			return *get().m_pLua;
+		}
+
+		//Get the input object
+		static LampInput& getInput()
+		{
+			return *getEngine().getInput();
+		}
+		
 		//Get the Window
 		static LampWindow& getWindow()
 		{

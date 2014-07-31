@@ -30,6 +30,7 @@
 #include <glm.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 
 //Include types
 #include "LampTypes.hpp"

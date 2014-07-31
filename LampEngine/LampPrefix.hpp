@@ -15,9 +15,14 @@ typedef LampMeshRenderer MeshRenderer;
 typedef LampColor Color;
 typedef LampTransform Transform;
 
+//Input
+typedef LampMouseListener MouseListener;
+typedef LampKeyListener KeyListener;
+typedef LampInput Input;
+
 //Geometry Components
-//typedef LampMesh Mesh;
-//typedef LampMeshData MeshData;
+typedef LampMesh Mesh;
+typedef LampMeshData MeshData;
 
 //Graphic components
 typedef LampTexture Texture;

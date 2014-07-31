@@ -16,48 +16,51 @@ namespace LampProject
 	{
 
 	private:
-		LampTransform m_transform;
 		mat4 m_projectionMatrix;
+		mat4 m_viewMatrix;
 
 	public:
 
-		LampCamera() :
-			m_transform(),
-			m_projectionMatrix(1.0f)
-		{
+		LampCamera();
+		~LampCamera();
 
-		}
+		void perspective(float fovY, float aspect, float zNear, float zFar);
 
-		void perspective(float fovY, float aspect, float zNear, float zFar)
-		{
-			m_projectionMatrix = glm::perspective(fovY, aspect, zNear, zFar);
-		}
+		void ortho2D(float left, float right, float bottom, float top);
 
-		void ortho2D(float left = 0, float right = Lamp::getWindow().getWidth(), float bottom = Lamp::getWindow().getHeight(), float top = 0)
-		{
-			m_projectionMatrix = glm::ortho(left, right, bottom, top);
-		}
+		void lookAt(vec3 eye, vec3 center);
 
-		mat4 getProjectionMatrix()
-		{
-			return m_projectionMatrix;
-		}
+		mat4& getProjectionMatrix();
 
-		mat4 getViewMatrix()
-		{
-			return m_transform.getGlobal();
-		}
+		mat4& getViewMatrix();
 
-		void onTick() 
-		{
-			//Calculate the view matrix every frame :p
-			//Or in this case, 60 times per second.
-			
-			m_transform.calculateGlobal(mat4(1.0f));
-		}
+		void onTick();
 
+		virtual void onCameraUpdate() {}; //Nothing here
+
+		void applyLegacyTransform();
+
+	};
+	
+	class LampChaseCamera : public LampCamera
+	{
 
 	};
 
+	class LampFreeCamera : public LampCamera
+	{
+	private:
+
+		vec3 position;
+		vec3 rotation;
+
+		vec3 forward;
+
+	public:
+		LampFreeCamera();
+
+		void calculateForward();
+		virtual void onCameraUpdate();
+	};
 
 }
