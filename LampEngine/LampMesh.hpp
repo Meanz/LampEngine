@@ -74,6 +74,9 @@ namespace LampProject
 		//The mesh data
 		LampMeshData m_meshData;
 
+		//The material for the mesh
+		LampMaterial* m_material;
+
 
 	public:
 		LampMesh();

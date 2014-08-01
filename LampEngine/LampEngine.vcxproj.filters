@@ -144,6 +144,12 @@
     <ClInclude Include="LampLuaFunction.hpp">
       <Filter>Header Files\Lua</Filter>
     </ClInclude>
+    <ClInclude Include="LampMaterial.hpp">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="LampMaterialParser.hpp">
+      <Filter>Header Files\Asset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -190,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="LampShaderParser.cpp">
       <Filter>Source Files\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="LampMaterial.cpp">
+      <Filter>Source Files\Material</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

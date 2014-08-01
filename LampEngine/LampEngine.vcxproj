@@ -74,6 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="LampMaterial.hpp" />
     <ClInclude Include="LampAssetManager.hpp" />
     <ClInclude Include="Lamp.hpp" />
     <ClInclude Include="LampApplication.hpp" />
@@ -82,6 +83,7 @@
     <ClInclude Include="LampGameObject.hpp" />
     <ClInclude Include="LampInput.hpp" />
     <ClInclude Include="LampLuaFunction.hpp" />
+    <ClInclude Include="LampMaterialParser.hpp" />
     <ClInclude Include="LampPrefix.hpp" />
     <ClInclude Include="LampRenderer.hpp" />
     <ClInclude Include="LampScene.hpp" />
@@ -106,6 +108,7 @@
     <ClCompile Include="LampEngine.cpp" />
     <ClCompile Include="LampGameObject.cpp" />
     <ClCompile Include="LampInput.cpp" />
+    <ClCompile Include="LampMaterial.cpp" />
     <ClCompile Include="LampRenderer.cpp" />
     <ClCompile Include="LampScene.cpp" />
     <ClCompile Include="LampShader.cpp" />

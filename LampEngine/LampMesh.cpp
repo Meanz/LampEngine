@@ -6,7 +6,8 @@ m_meshData(),
 m_vboPositions(0), m_vboNormals(0), m_vboUVs(0), m_vboIndices(0), m_vao(0), m_displayList(0),
 m_needCompile(false), m_isCompiled(false), m_compileMode(LampMeshCompileMode::COMPILE_VAO)
 {
-
+	//Get default material
+	m_material = Lamp::getAssetManager().getMaterial("default");
 }
 
 LampMesh::~LampMesh()

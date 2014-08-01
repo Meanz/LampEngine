@@ -1,8 +1,8 @@
 #pragma once
 
 #include "LampApplication.hpp"
-#include "LampScene.hpp"
 #include "LampAssetManager.hpp"
+#include "LampScene.hpp"
 #include "LampWindow.hpp"
 #include "LampRenderer.hpp"
 #include "LampInput.hpp"

@@ -2,8 +2,9 @@
 
 #include <vector>
 #include <map>
-#include "LampTexture.hpp"
+#include "LampMaterial.hpp"
 #include "LampShader.hpp"
+
 
 namespace LampProject
 {
@@ -16,11 +17,21 @@ namespace LampProject
 
 		std::map<std::string, LampTexture*> m_mTextures;
 		std::map<std::string, LampShaderProgram*> m_mShaderPrograms;
+		std::map<std::string, LampMaterial*> m_mMaterials;
 
 	public:
 
 		LampAssetManager();
 		~LampAssetManager();
+
+		//Create a material
+		LampMaterial* createMaterial(std::string materialId);
+
+		//Load the given material
+		LampMaterial* loadMaterial(std::string materialId, std::string materialPath);
+
+		//Get the material with the given id
+		LampMaterial* getMaterial(std::string materialId);
 
 		//Get the texture with the specified id
 		//Returns 0 if the texture was not found

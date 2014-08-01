@@ -7,6 +7,15 @@ LampAssetManager::LampAssetManager() :
 m_texIdCounter(0)
 {
 
+	//Create a basic shader program
+	//Well, we are not going to do this
+	//std::string fragSource = "#version 330\nout vec4 out_color\nvoid main {\nout_color=vec4(1.0, 1.0, 1.0, 1.0);\n}\n";
+	//std::string vertSource = "#version 330\nin vec3 position;\nin vec3 normal;\nin vec2 uv;\nuniform mat4 T_projectionView;\nmat4 T_world;\nvoid main()\ngl_Position=(T_projectionView * T_world)*vec4(position, 1.0);\n}\n";
+
+
+	//Load our default material
+	loadMaterial("default", "./data/materials/default.lmaterial");
+
 }
 
 LampAssetManager::~LampAssetManager()
@@ -20,7 +29,33 @@ LampAssetManager::~LampAssetManager()
 	}
 }
 
-LampTexture* LampAssetManager::getTexture(std::string textureId) 
+LampMaterial* LampAssetManager::createMaterial(std::string materialId)
+{
+	//collio!
+	return NULL;
+}
+
+LampMaterial* LampAssetManager::loadMaterial(std::string materialId, std::string materialPath)
+{
+
+	//
+	return NULL;
+}
+
+LampMaterial* LampAssetManager::getMaterial(std::string materialId)
+{
+	std::map<std::string, LampMaterial*>::iterator iter = m_mMaterials.find(materialId);
+	if (iter != m_mMaterials.end())
+	{
+		return iter->second;
+	}
+	else
+	{
+		return NULL; //Return NULL
+	}
+}
+
+LampTexture* LampAssetManager::getTexture(std::string textureId)
 {
 	std::map<std::string, LampTexture*>::iterator iter = m_mTextures.find(textureId);
 	if (iter != m_mTextures.end())
@@ -59,7 +94,7 @@ LampTexture* LampAssetManager::loadTexture(std::string textureId, std::string te
 	{
 		return NULL;
 	}
-	
+
 }
 
 LampShaderProgram* LampAssetManager::getShaderProgram(std::string shaderId)
@@ -82,7 +117,7 @@ LampShaderProgram* LampAssetManager::loadShaderProgram(std::string shaderId, std
 	LampShaderProgram* pShaderProgram = NULL;
 	if (pParser->parse())
 	{
-		
+
 		//Create our shader program
 		pShaderProgram = new LampShaderProgram();
 
@@ -100,7 +135,7 @@ LampShaderProgram* LampAssetManager::loadShaderProgram(std::string shaderId, std
 
 		//If the compilation was successful continue moving towards the mapping process
 		//Otherwise the program will be deleted along with the attached shaders
-		if (didCompile) 
+		if (didCompile)
 		{
 			//Assign the shader program
 			m_mShaderPrograms[shaderId] = pShaderProgram;
@@ -108,7 +143,7 @@ LampShaderProgram* LampAssetManager::loadShaderProgram(std::string shaderId, std
 		else
 		{
 			delete pShaderProgram;
-			pShaderProgram = NULL; 
+			pShaderProgram = NULL;
 		}
 	}
 
