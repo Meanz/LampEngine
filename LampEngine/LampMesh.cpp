@@ -208,10 +208,7 @@ void LampMesh::render()
 			if (pShaderProgram != NULL)
 			{
 				pShaderProgram->use();
-
-				//Uniforms :D
-				glGetUniformLocation(pShaderProgram->getGLId());
-
+				pShaderProgram->updateUniforms(*Lamp::getEngine().getRenderer());
 			}
 
 			glBindVertexArray(m_vao);
@@ -219,6 +216,8 @@ void LampMesh::render()
 				glDrawElements(GL_TRIANGLES, m_meshData.numIndices, GL_UNSIGNED_INT, 0);
 			}
 			glBindVertexArray(0);
+
+			glUseProgram(0);
 		}
 	}
 	else

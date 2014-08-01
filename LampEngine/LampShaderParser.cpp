@@ -2,7 +2,7 @@
 #include "LampShaderParser.hpp"
 ///
 /// Lua Exports
-///
+/// 
 
 static void stackDump(LuaState L) {
 	int i = lua_gettop(L);
@@ -165,6 +165,11 @@ LampShaderParser::~LampShaderParser()
 
 }
 
+LampShaderMap LampShaderParser::getShaderMap()
+{
+	return m_shaderMap;
+}
+
 void LampShaderParser::setVersion(int version)
 {
 	m_shaderVersion = version;
@@ -224,14 +229,64 @@ bool LampShaderParser::parse()
 		pShader.setSource(_tempShaderSource);
 	}
 
-	//Post processing
+	goto failJmp;
+fail: 
+	printf("Error parsing shader %s -- %s\n", m_lShaderPath.c_str(),"");
+	return false;
+failJmp:
 
+	//Post processing
 	for (unsigned int i = 0; i < m_vShaders.size(); i++)
 	{
 		//Do something with the shader
+		
 		LampShader& pShader = *m_vShaders[i];
 
+		//Process the shader source
+		std::string& src = pShader.getSource();
+
+		//convenience
+		using namespace std;
+
+		//working source
+		std::string wsrc = src;
+		string::size_type uniformPos;
+		string::size_type idx, idx2; //index that we can work with, temp shit
+		int uniformSkipLength = string("uniform").length();
+
+		while ((uniformPos = wsrc.find("uniform")) != string::npos)
+		{
+			wsrc = wsrc.substr(uniformPos + uniformSkipLength);
+			
+			//Find the next space
+			idx = wsrc.find(" ");
+			if (idx == string::npos) goto fail;
+
+			//Find next semicolon
+			idx2 = wsrc.find(";");
+			if (idx2 == string::npos) goto fail;
+
+			//What's in between is now the uniform type and name!
+			std::string uniformTypeName = wsrc.substr(idx + 1, idx2 -1);
+			
+			idx = uniformTypeName.find(" ");
+			if (idx == string::npos) goto fail; //Can't really happen, but let's be sure :D
+
+			std::string uniformType = uniformTypeName.substr(0, idx);
+			std::string uniformName = uniformTypeName.substr(idx + 1);
+
+			printf("type: '%s'\n", uniformType.c_str());
+			printf("name: '%s'\n", uniformName.c_str());
+
+			//Push uniform name and type to the map, and push -1 for the location just for alloc's sake
+			m_shaderMap.uniformNames.push_back(uniformName);
+			m_shaderMap.uniformTypes.push_back(uniformType);
+			m_shaderMap.uniformLocations.push_back(-1);
+
+		}
 	}
+
+	
 
 	//We completed the parsing
 	return true;

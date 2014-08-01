@@ -14,7 +14,7 @@ LampShader::~LampShader()
 		glDeleteShader(m_glId);
 }
 
-int LampShader::getGLId()
+GLuint LampShader::getGLId()
 {
 	return m_glId;
 }
@@ -138,6 +138,11 @@ LampShaderProgram::~LampShaderProgram()
 	}
 }
 
+GLuint LampShaderProgram::getGLId()
+{
+	return m_glId;
+}
+
 std::string LampShaderProgram::getErrorString()
 {
 	return m_errorString;
@@ -165,8 +170,10 @@ void LampShaderProgram::clearShaders()
 	m_vShaders.clear();
 }
 
-bool LampShaderProgram::compile()
+bool LampShaderProgram::compile(LampShaderMap shaderMap)
 {
+	//Set the shader map
+	m_shaderMap = shaderMap;
 
 	//Try to compile all shaders before we continue compiling!
 	//Important for the recompile feature!
@@ -250,6 +257,26 @@ bool LampShaderProgram::compile()
 	{
 		m_isCompiled = true;
 		printf("Program linked okay!");
+
+		//Find all uniform locations
+		int samplerIndex = 0;
+		for (unsigned int i = 0; i < m_shaderMap.uniformNames.size(); i++)
+		{
+			GLint loc = glGetUniformLocation(m_glId, m_shaderMap.uniformNames[i].c_str());
+			if (loc == -1) 
+			{
+				printf("Could not find location for uniform %s\n", m_shaderMap.uniformNames[i].c_str());
+			}
+			else
+			{
+				m_shaderMap.uniformLocations[i] = loc;
+
+				if (m_shaderMap.uniformTypes[i] == "sampler2D")
+				{
+					m_shaderMap.samplerSlots[m_shaderMap.uniformNames[i]] = samplerIndex++;
+				}
+			}
+		}
 	}
 
 	return !compileFailed; //Compile okay! Wooohoo
@@ -270,5 +297,54 @@ void LampShaderProgram::use()
 
 void LampShaderProgram::updateUniforms(LampRenderer& renderer)
 {
+	for (unsigned int i = 0; i < m_shaderMap.uniformNames.size(); i++)
+	{
+		std::string& uniformName = m_shaderMap.uniformNames[i];
+		std::string& uniformType = m_shaderMap.uniformTypes[i];
+		const GLint uniformLocation = m_shaderMap.uniformLocations[i];
 
+		if (uniformLocation == -1)
+		{
+			continue; //Ignore this mapping
+		}
+
+		//Do uniform name checkings
+		//Should really pass these things into hashes later for easier lookups
+		//Maybe some fancy lookup tables :D
+		if (uniformName.substr(0, 2) == "R_")
+		{
+		}
+		else if (uniformType == "sampler2D")
+		{
+			//Lookup sampler slots
+			GLuint samplerSlot = m_shaderMap.getSamplerSlot(uniformName);
+			if (samplerSlot == -1) continue; //sampler slot not found
+			std::string map = uniformName.substr(2);
+
+			//Find texture through material
+			//tex = pMaterial->getTexture(map)
+			//tex->bind();
+		}
+		else if (uniformName.substr(0, 2) == "T_")
+		{
+			//Transform related
+			std::string unprefixedName = uniformName.substr(2);
+
+			if (unprefixedName == "projectionView")
+			{
+				//Get the projection matrix from the camera
+				glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(Lamp::getScene().getCamera()->getProjectionMatrix()));
+			}
+			else if (unprefixedName == "world")
+			{
+				//Get the projection matrix from the camera
+				//Just for testing :D
+				glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(Lamp::getScene().getCamera()->getViewMatrix()));
+			}
+		}
+		else
+		{
+			printf("Unhandled uniform type: %s name: %s in shader.\n", uniformType.c_str(), uniformName.c_str());
+		}
+	}
 }

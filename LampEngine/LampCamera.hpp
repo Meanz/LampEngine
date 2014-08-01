@@ -30,6 +30,16 @@ namespace LampProject
 
 		void lookAt(vec3 eye, vec3 center);
 
+		mat4* getPM()
+		{
+			return &m_projectionMatrix;
+		}
+
+		mat4* getV()
+		{
+			return &m_viewMatrix;
+		}
+
 		mat4& getProjectionMatrix();
 
 		mat4& getViewMatrix();

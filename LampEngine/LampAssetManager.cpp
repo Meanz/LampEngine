@@ -96,7 +96,7 @@ LampShaderProgram* LampAssetManager::loadShaderProgram(std::string shaderId, std
 		//Concatenate all the uniform mappings and send them to the shader program
 		//TODO: What this string says
 
-		bool didCompile = pShaderProgram->compile();
+		bool didCompile = pShaderProgram->compile(pParser->getShaderMap());
 
 		//If the compilation was successful continue moving towards the mapping process
 		//Otherwise the program will be deleted along with the attached shaders
