@@ -121,12 +121,14 @@ void LampInput::pollInput()
 		else if (event.type == SDL_KEYDOWN)
 		{
 			int vKey = event.key.keysym.sym;
+			if (vKey >= MAX_VIRTUAL_KEYS) continue; //Ignore event
 			m_vKeysPressed.push_back(vKey);
 			m_bKeys[vKey] = true;
 		}
 		else if (event.type == SDL_KEYUP)
 		{
 			int vKey = event.key.keysym.sym;
+			if (vKey >= MAX_VIRTUAL_KEYS) continue; //Ignore event
 			m_vKeysReleased.push_back(vKey);
 			m_bKeys[vKey] = false;
 		}

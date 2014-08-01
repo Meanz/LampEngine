@@ -81,6 +81,7 @@
     <ClInclude Include="LampEngine.hpp" />
     <ClInclude Include="LampGameObject.hpp" />
     <ClInclude Include="LampInput.hpp" />
+    <ClInclude Include="LampLuaFunction.hpp" />
     <ClInclude Include="LampPrefix.hpp" />
     <ClInclude Include="LampRenderer.hpp" />
     <ClInclude Include="LampScene.hpp" />

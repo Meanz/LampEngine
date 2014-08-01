@@ -14,7 +14,17 @@ LampShader::~LampShader()
 		glDeleteShader(m_glId);
 }
 
+int LampShader::getGLId()
+{
+	return m_glId;
+}
+
 std::string LampShader::getErrorString()
+{
+	return m_errorString;
+}
+
+std::string LampShader::getSource()
 {
 	return m_shaderSource;
 }
@@ -22,6 +32,31 @@ std::string LampShader::getErrorString()
 void LampShader::setSource(std::string src)
 {
 	m_shaderSource = src;
+}
+
+LampShaderType LampShader::getType()
+{
+	return m_shaderType;
+}
+
+std::string LampShader::getTypeString()
+{
+	if (m_shaderType == LampShaderType::FRAGMENT) 
+	{
+		return "FRAGMENT_SHADER";
+	}
+	else if (m_shaderType == LampShaderType::VERTEX)
+	{
+		return "VERTEX_SHADER";
+	}
+	else if (m_shaderType == LampShaderType::GEOMETRY)
+	{
+		return "GEOMETRY_SHADER";
+	} 
+	else
+	{
+		return "UNKNOWN TYPE";
+	}
 }
 
 bool LampShader::compile()
@@ -67,9 +102,9 @@ bool LampShader::compile()
 	glCompileShader(m_glId);
 	//Is compiled?
 	GLint isCompiled = 0;
-	glGetShaderiv(m_glId, GL_COMPILE_STATUS, &isCompiled);
+	glGetShaderiv(m_glId, GL_COMPILE_STATUS, (int*)&isCompiled);
 
-	if (!isCompiled)
+	if (isCompiled == GL_FALSE)
 	{
 		//Store error string!
 		GLint maxLength = 0;
@@ -103,9 +138,18 @@ LampShaderProgram::~LampShaderProgram()
 	}
 }
 
+std::string LampShaderProgram::getErrorString()
+{
+	return m_errorString;
+}
+
 void LampShaderProgram::addShader(LampShader* pShader)
 {
-	if (pShader == NULL) return; //Don't want to add a null shader do we
+	if (pShader == NULL)
+	{
+		printf("Attempted to add null shader.\n");
+		return; //Don't want to add a null shader do we
+	}
 
 	m_vShaders.push_back(pShader);
 }
@@ -139,7 +183,7 @@ bool LampShaderProgram::compile()
 		if (!didCompile)
 		{
 			//Print log?
-			printf("Shader Compile Error\n%s", m_vShaders[i]->getErrorString().c_str());
+			printf("Shader[%s] Compile Error\n%s", m_vShaders[i]->getTypeString().c_str(), m_vShaders[i]->getErrorString().c_str());
 
 			compileFailed = true;
 			break;
@@ -147,6 +191,7 @@ bool LampShaderProgram::compile()
 	}
 	if (compileFailed)
 	{
+		printf("Unable to compile shaders.\n");
 		return false;
 	}
 
@@ -160,12 +205,54 @@ bool LampShaderProgram::compile()
 	//Attach all shaders!
 	for (unsigned int i = 0; i < m_vShaders.size(); i++)
 	{
-
+		printf("Attached shader: %i\n", i);
+		glAttachShader(m_glId, m_vShaders[i]->getGLId());
 	}
 
+	glLinkProgram(m_glId);
 
-	m_isCompiled = true;
-	return true; //Compile okay! Wooohoo
+	GLint isLinked = 0;
+	glGetProgramiv(m_glId, GL_LINK_STATUS, (int*)&isLinked);
+
+	if (isLinked == GL_FALSE)
+	{
+		//Store error string!
+		GLint maxLength = 0;
+		glGetProgramiv(m_glId, GL_INFO_LOG_LENGTH, &maxLength);
+
+		std::vector<GLchar> infoLog(maxLength);
+		glGetProgramInfoLog(m_glId, maxLength, &maxLength, &infoLog[0]);
+
+		m_errorString = (char*)&infoLog[0];
+
+		compileFailed = true;
+	}
+
+	//Delete the attached shaders!
+	for (unsigned int i = 0; i < m_vShaders.size(); i++)
+	{
+		glDetachShader(m_glId, m_vShaders[i]->getGLId());
+		delete m_vShaders[i]; //Delete the shader!
+	}
+	m_vShaders.clear();
+
+	
+
+	//Error checking
+	printf("########## SHADER LOG ##########\n");
+	if (compileFailed) 
+	{
+		m_isCompiled = false;
+		printf("Unable to link program: \n%s\n", m_errorString.c_str());
+		std::cin.get();
+	}
+	else
+	{
+		m_isCompiled = true;
+		printf("Program linked okay!");
+	}
+
+	return !compileFailed; //Compile okay! Wooohoo
 }
 
 void LampShaderProgram::use()

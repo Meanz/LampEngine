@@ -203,6 +203,17 @@ void LampMesh::render()
 		}
 		else if (m_compileMode == LampMeshCompileMode::COMPILE_VAO)
 		{
+			//Try to use our shader :p
+			LampShaderProgram* pShaderProgram = Lamp::getAssetManager().getShaderProgram("testShader");
+			if (pShaderProgram != NULL)
+			{
+				pShaderProgram->use();
+
+				//Uniforms :D
+				glGetUniformLocation(pShaderProgram->getGLId());
+
+			}
+
 			glBindVertexArray(m_vao);
 			{
 				glDrawElements(GL_TRIANGLES, m_meshData.numIndices, GL_UNSIGNED_INT, 0);

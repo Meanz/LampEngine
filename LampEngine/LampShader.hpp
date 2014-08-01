@@ -5,6 +5,9 @@
 namespace LampProject
 {
 
+	//simple forward declaration
+	class LampRenderer;
+
 	enum LampShaderType
 	{
 		FRAGMENT,
@@ -26,7 +29,11 @@ namespace LampProject
 		LampShader(LampShaderType);
 		~LampShader();
 
+		int getGLId();
 		std::string getErrorString();
+		std::string getSource();
+		LampShaderType getType();
+		std::string getTypeString();
 		void setSource(std::string);
 		bool compile();
 
@@ -39,6 +46,7 @@ namespace LampProject
 		GLuint m_glId;
 		std::vector<LampShader*> m_vShaders;
 		bool m_isCompiled;
+		std::string m_errorString;
 
 
 	public:
@@ -46,6 +54,7 @@ namespace LampProject
 		LampShaderProgram();
 		~LampShaderProgram();
 
+		std::string getErrorString();
 		void addShader(LampShader* pShader);
 		void clearShaders();
 		bool compile();

@@ -67,6 +67,9 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{e462e276-c578-45ab-9bec-0b3b0570ea75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Lua">
+      <UniqueIdentifier>{db7933bc-e6b1-421e-8aec-08be9b8805fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lamp.hpp">
@@ -126,9 +129,6 @@
     <ClInclude Include="LampInput.hpp">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="LampLua.hpp">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="LampShader.hpp">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
@@ -137,6 +137,12 @@
     </ClInclude>
     <ClInclude Include="LampShaderParser.hpp">
       <Filter>Header Files\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="LampLua.hpp">
+      <Filter>Header Files\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LampLuaFunction.hpp">
+      <Filter>Header Files\Lua</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
