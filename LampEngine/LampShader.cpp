@@ -295,8 +295,9 @@ void LampShaderProgram::use()
 	}
 }
 
-void LampShaderProgram::updateUniforms(LampRenderer& renderer)
+void LampShaderProgram::updateUniforms(LampRenderer& renderer, LampMaterial* pMaterial)
 {
+	assert(pMaterial);
 	for (unsigned int i = 0; i < m_shaderMap.uniformNames.size(); i++)
 	{
 		std::string& uniformName = m_shaderMap.uniformNames[i];
@@ -313,17 +314,34 @@ void LampShaderProgram::updateUniforms(LampRenderer& renderer)
 		//Maybe some fancy lookup tables :D
 		if (uniformName.substr(0, 2) == "R_")
 		{
-		}
-		else if (uniformType == "sampler2D")
-		{
-			//Lookup sampler slots
-			GLuint samplerSlot = m_shaderMap.getSamplerSlot(uniformName);
-			if (samplerSlot == -1) continue; //sampler slot not found
-			std::string map = uniformName.substr(2);
+			if (uniformType == "sampler2D")
+			{
+				//Lookup sampler slots
+				GLuint samplerSlot = m_shaderMap.getSamplerSlot(uniformName);
+				if (samplerSlot == -1) continue; //sampler slot not found
+				std::string map = uniformName.substr(2);
 
-			//Find texture through material
-			//tex = pMaterial->getTexture(map)
-			//tex->bind();
+				//Find texture through material
+				//tex = pMaterial->getTexture(map)
+				//tex->bind();
+			}
+		}
+		else if (uniformName.substr(0, 2) == "M_")
+		{
+			if (uniformType == "sampler2D")
+			{
+				//Lookup sampler slots
+				GLuint samplerSlot = m_shaderMap.getSamplerSlot(uniformName);
+				if (samplerSlot == -1) continue; //sampler slot not found
+				std::string map = uniformName.substr(2);
+
+				//Find texture through material
+				LampTexture* tex = pMaterial->getTexture(map);
+				if (tex != NULL)
+				{
+					tex->bind();
+				}
+			}
 		}
 		else if (uniformName.substr(0, 2) == "T_")
 		{

@@ -4,11 +4,6 @@
 
 LampMaterial::LampMaterial()
 {
-	//Initialize all textures to null
-	for (unsigned int i = 0; i < MAX_MATERIAL_TEXTURE; i++)
-	{
-		m_textures[i] = NULL;
-	}
 }
 
 LampMaterial::~LampMaterial()
@@ -54,6 +49,11 @@ void LampMaterial::setVec3(std::string key, vec3 v)
 void LampMaterial::setVec4(std::string key, vec4 v)
 {
 	m_valueMap.m_vec4Map[key] = v;
+}
+
+void LampMaterial::setTexture(std::string key, LampTexture* pTexture)
+{
+	m_valueMap.m_textures[key] = pTexture;
 }
 
 float LampMaterial::getFloat(std::string key)
@@ -157,5 +157,18 @@ vec4 LampMaterial::getVec4(std::string key)
 	else
 	{
 		return vec4(0.0); //Return NULL
+	}
+}
+
+LampTexture* LampMaterial::getTexture(std::string key)
+{
+	std::map<std::string, LampTexture*>::iterator iter = m_valueMap.m_textures.find(key);
+	if (iter != m_valueMap.m_textures.end())
+	{
+		return iter->second;
+	}
+	else
+	{
+		return NULL; //Return NULL
 	}
 }

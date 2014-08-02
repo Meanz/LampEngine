@@ -105,7 +105,7 @@ namespace LampProject
 		//Use this shader program
 		void use();
 		//Update the uniforms of this shader program
-		void updateUniforms(LampRenderer& renderer);
+		void updateUniforms(LampRenderer& renderer, LampMaterial* pMaterial);
 	};
 
 }

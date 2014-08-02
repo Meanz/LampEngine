@@ -82,6 +82,12 @@ namespace LampProject
 		LampMesh();
 		~LampMesh();
 
+		//Get the material of this mesh
+		LampMaterial* getMaterial();
+
+		//Set the material of this mesh
+		void setMaterial(LampMaterial* pMaterial);
+
 		//Get the mesh data associated with this mesh
 		LampMeshData* getMeshData();
 

@@ -37,8 +37,11 @@ LampMaterial* LampAssetManager::createMaterial(std::string materialId)
 
 LampMaterial* LampAssetManager::loadMaterial(std::string materialId, std::string materialPath)
 {
+	
+	//Just create an empty material
+	LampMaterial* pMaterial = new LampMaterial();
 
-	//
+	m_mMaterials[materialId] = pMaterial;
 	return NULL;
 }
 

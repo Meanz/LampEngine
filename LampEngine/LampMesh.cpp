@@ -29,6 +29,16 @@ LampMesh::~LampMesh()
 	}
 }
 
+LampMaterial* LampMesh::getMaterial()
+{
+	return m_material;
+}
+
+void LampMesh::setMaterial(LampMaterial* pMaterial)
+{
+	m_material = pMaterial;
+}
+
 LampMeshData* LampMesh::getMeshData()
 {
 	return (&m_meshData);
@@ -141,14 +151,14 @@ void LampMesh::compile()
 			{
 				glEnableVertexAttribArray(1);
 				glBindBuffer(GL_ARRAY_BUFFER, m_vboNormals);
-				glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(vec3), 0);
+				glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(vec3), 0);
 			}
 
 			if (m_meshData.uvs > 0)
 			{
 				glEnableVertexAttribArray(2);
 				glBindBuffer(GL_ARRAY_BUFFER, m_vboUVs);
-				glVertexAttribPointer(0, 2, GL_FLOAT, false, sizeof(vec2), 0);
+				glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(vec2), 0);
 			}
 
 			if (m_meshData.indices > 0)
@@ -209,7 +219,7 @@ void LampMesh::render()
 			if (pShaderProgram != NULL)
 			{
 				pShaderProgram->use();
-				pShaderProgram->updateUniforms(*Lamp::getEngine().getRenderer());
+				pShaderProgram->updateUniforms(*Lamp::getEngine().getRenderer(), m_material);
 			}
 
 			glBindVertexArray(m_vao);

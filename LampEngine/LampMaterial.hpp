@@ -17,6 +17,7 @@ namespace LampProject
 		std::map<std::string, vec2> m_vec2Map;
 		std::map<std::string, vec3> m_vec3Map;
 		std::map<std::string, vec4> m_vec4Map;
+		std::map<std::string, LampTexture*> m_textures;
 	};
 
 	class LampMaterial
@@ -25,13 +26,15 @@ namespace LampProject
 		vec4 m_diffuseColor;
 		vec4 m_specularColor;
 		float m_specularIntensity;
-		LampTexture* m_textures[MAX_MATERIAL_TEXTURE]; //Max 4 textures per material, we will change this later
 		LampValueMap m_valueMap;
 		
 	public:
 
 		LampMaterial();
 		~LampMaterial();
+
+		LampTexture* getTexture(std::string key);
+		void setTexture(std::string key, LampTexture* pTexture);
 
 		void setFloat(std::string key, float f);
 		void setInt(std::string key, int i); //sint
