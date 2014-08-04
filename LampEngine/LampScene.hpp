@@ -20,6 +20,7 @@ namespace LampProject {
 
 		void setCamera(LampCamera* pCamera);
 		LampCamera* getCamera();
+		LampGameObject* getRoot();
 
 		void attach(LampGameObject* child);
 		void detatch(LampGameObject* child);

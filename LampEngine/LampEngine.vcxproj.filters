@@ -70,6 +70,9 @@
     <Filter Include="Header Files\Lua">
       <UniqueIdentifier>{db7933bc-e6b1-421e-8aec-08be9b8805fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Lua">
+      <UniqueIdentifier>{930cfa14-aeb6-4ee0-b8b7-7d723075b77f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lamp.hpp">
@@ -150,6 +153,12 @@
     <ClInclude Include="LampMaterialParser.hpp">
       <Filter>Header Files\Asset</Filter>
     </ClInclude>
+    <ClInclude Include="LampScriptComponent.hpp">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="LampMWMLoader.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -199,6 +208,15 @@
     </ClCompile>
     <ClCompile Include="LampMaterial.cpp">
       <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="LampLua.cpp">
+      <Filter>Source Files\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="LampScriptComponent.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="LampMWMLoader.cpp">
+      <Filter>Source Files\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

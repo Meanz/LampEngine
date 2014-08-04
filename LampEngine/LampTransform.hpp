@@ -19,6 +19,8 @@ namespace LampProject
 		//Global transformation matrix ( world space ) 
 		mat4 global;
 
+		bool hasChanged;
+
 	public:
 
 		//Cool initializer, didn't know they had these = default value things.
@@ -27,10 +29,16 @@ namespace LampProject
 			rotation(_rotation),
 			scale(_scale),
 			local(1.0f),
-			global(1.0f)
+			global(1.0f),
+			hasChanged(true)
 		{}
 
 		~LampTransform() {}
+
+		inline void flagChange()
+		{
+			hasChanged = true;
+		}
 
 		//Ge the local transform matrix for this transform
 		mat4 getLocal()
@@ -44,6 +52,13 @@ namespace LampProject
 			return global;
 		}
 
+		//Pointer version
+		//Important, changes done here will not flag has changed
+		mat4* getGlobalPtr()
+		{
+			return &global;
+		}
+
 		vec3 getPosition()
 		{
 			return position;
@@ -52,6 +67,7 @@ namespace LampProject
 		void setPosition(vec3 _position)
 		{
 			position = _position;
+			flagChange();
 		}
 
 		//Translate this Transform by the given values
@@ -60,12 +76,14 @@ namespace LampProject
 			position.x += x;
 			position.y += y;
 			position.z += z;
+			flagChange();
 		}
 
 		//Translate this Transform by the given vector
 		void translate(vec3 translation)
 		{
 			position += translation;
+			flagChange();
 		}
 
 		//do some weird stuff here
@@ -77,6 +95,7 @@ namespace LampProject
 			//I suck at assembly so don't even challenge me here.
 			quat newQuat = glm::angleAxis(angle, axis);
 			rotation = rotation * newQuat;
+			flagChange();
 		}
 
 		//Yeah, this won't happen just yet,
@@ -87,12 +106,26 @@ namespace LampProject
 		}
 
 		//Calculate the global and local matrix for this transform
-		void calculateGlobal(mat4& parent)
+		void calculateGlobal(mat4* parent)
 		{
+			if (!hasChanged)
+			{
+				return; 
+			}
+
 			//Calculate local
 			local = glm::translate(mat4(1.0f), position) * glm::mat4_cast(rotation) * glm::scale(mat4(1.0f), scale);
 
-			global = parent * local;
+			if (parent == NULL)
+			{
+				global = local;
+			}
+			else
+			{
+				global = *parent * local;
+			}
+
+			hasChanged = false; //We did update
 		}
 
 		//Should this use global or local ?

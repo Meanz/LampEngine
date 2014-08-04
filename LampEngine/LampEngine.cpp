@@ -118,7 +118,7 @@ void LampEngine::loop()
 		m_pApplication->onPreFrame();
 
 		//Tell the scene we are rendering
-		m_pScene->onFrame();
+		m_pRenderer->render(m_pScene->getRoot());
 
 		//Tell the application that a frame is happening
 		m_pApplication->onFrame();

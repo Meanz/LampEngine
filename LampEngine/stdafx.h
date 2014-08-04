@@ -13,6 +13,7 @@
 
 //Cstring
 #include <string>
+#include <vector>
 
 //Windows stuff
 #include <Windows.h>

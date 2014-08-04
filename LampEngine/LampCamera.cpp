@@ -12,7 +12,7 @@ LampCamera::~LampCamera()
 
 }
 
-void LampCamera::perspective(float fovY = 60.0f, float aspect = Lamp::getWindow().getAspect(), float zNear = 0.0f, float zFar = 100.0f)
+void LampCamera::perspective(float fovY = 60.0f, float aspect = Lamp::getWindow().getAspect(), float zNear = 1.0f, float zFar = 100.0f)
 {
 	m_projectionMatrix = glm::perspective(glm::radians(fovY), aspect, zNear, zFar);
 }
@@ -62,12 +62,19 @@ LampFreeCamera::LampFreeCamera() : LampCamera()
 	position = vec3(-5.0f, 5.0f, -5.0f);
 }
 
+vec3 makeFW(float pitch, float yaw)
+{
+	vec3 forward;
+	forward.x = glm::sin(glm::radians(yaw));
+	forward.y = glm::sin(glm::radians(-pitch));
+	forward.z = glm::cos(glm::radians(yaw));
+	forward = glm::normalize(forward);
+	return forward;
+}
+
 void LampFreeCamera::calculateForward()
 {
-	forward.x = glm::sin(glm::radians(rotation.y));
-	forward.y = glm::sin(glm::radians(-rotation.x));
-	forward.z = glm::cos(glm::radians(rotation.y));
-	forward = glm::normalize(forward);
+	forward = makeFW(rotation.x, rotation.y);
 }
 
 void LampFreeCamera::onCameraUpdate()
@@ -80,6 +87,43 @@ void LampFreeCamera::onCameraUpdate()
 		rotation.x += dy * 0.1f;
 		rotation.y += dx * 0.1f; //Some weird value :D
 	}
+
+	//Move the camera according to button presses
+	float moveSpeed = 0.1f;
+	if (Lamp::getInput().isKeyDown(SDLK_w))
+	{
+		vec3 tmpForward = forward;
+		tmpForward.y = 0.0f;
+		position += tmpForward * moveSpeed;
+	}
+	if (Lamp::getInput().isKeyDown(SDLK_s))
+	{
+		vec3 tmpForward = forward;
+		tmpForward.y = 0.0f;
+		position -= tmpForward * moveSpeed;
+	}
+	if (Lamp::getInput().isKeyDown(SDLK_a))
+	{
+		//Strafe left :o
+		vec3 left = makeFW(rotation.x, rotation.y + 90.0f);
+		left.y = 0.0f;
+		position += left * moveSpeed;
+	}
+	if (Lamp::getInput().isKeyDown(SDLK_d))
+	{
+		vec3 right = makeFW(rotation.x, rotation.y - 90.0f);
+		right.y = 0.0f;
+		position += right * moveSpeed;
+	}
+	if (Lamp::getInput().isKeyDown(SDLK_q))
+	{
+		position.y += moveSpeed;
+	}
+	if (Lamp::getInput().isKeyDown(SDLK_e))
+	{
+		position.y -= moveSpeed;
+	}
+
 	//update our view matrix!
 	calculateForward();
 

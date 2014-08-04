@@ -9,7 +9,8 @@ namespace LampProject {
 	enum LampNodeComponentType
 	{
 		BASE = 0,
-		MESH_RENDERER = 1
+		MESH_RENDERER = 1,
+		SCRIPT = 2
 	};
 
 	class LampNodeComponent

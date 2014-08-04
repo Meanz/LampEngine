@@ -212,7 +212,7 @@ bool LampShaderProgram::compile(LampShaderMap shaderMap)
 	//Attach all shaders!
 	for (unsigned int i = 0; i < m_vShaders.size(); i++)
 	{
-		printf("Attached shader: %i\n", i);
+		//printf("Attached shader: %i\n", i);
 		glAttachShader(m_glId, m_vShaders[i]->getGLId());
 	}
 
@@ -256,7 +256,7 @@ bool LampShaderProgram::compile(LampShaderMap shaderMap)
 	else
 	{
 		m_isCompiled = true;
-		printf("Program linked okay!");
+		//printf("Program linked okay!");
 
 		//Find all uniform locations
 		int samplerIndex = 0;
@@ -328,19 +328,53 @@ void LampShaderProgram::updateUniforms(LampRenderer& renderer, LampMaterial* pMa
 		}
 		else if (uniformName.substr(0, 2) == "M_")
 		{
+			//Transform related
+			std::string unprefixedName = uniformName.substr(2);
+
 			if (uniformType == "sampler2D")
 			{
 				//Lookup sampler slots
 				GLuint samplerSlot = m_shaderMap.getSamplerSlot(uniformName);
 				if (samplerSlot == -1) continue; //sampler slot not found
-				std::string map = uniformName.substr(2);
 
 				//Find texture through material
-				LampTexture* tex = pMaterial->getTexture(map);
+				LampTexture* tex = pMaterial->getTexture(unprefixedName);
 				if (tex != NULL)
 				{
 					tex->bind();
 				}
+			}
+			else if (uniformType == "float")
+			{
+				glUniform1f(uniformLocation, pMaterial->getFloat(unprefixedName));
+			}
+			else if (uniformType == "int")
+			{
+				glUniform1i(uniformLocation, pMaterial->getInt(unprefixedName));
+			}
+			else if (uniformType == "bool")
+			{
+				glUniform1i(uniformLocation, pMaterial->getBool(unprefixedName) ? 1 : 0);
+			}
+			else if (uniformType == "vec2")
+			{
+				glUniform2fv(uniformLocation, 1, glm::value_ptr(pMaterial->getVec2(unprefixedName)));
+			}
+			else if (uniformType == "vec3")
+			{
+				glUniform2fv(uniformLocation, 1, glm::value_ptr(pMaterial->getVec3(unprefixedName)));
+			}
+			else if (uniformType == "vec4")
+			{
+				glUniform2fv(uniformLocation, 1, glm::value_ptr(pMaterial->getVec4(unprefixedName)));
+			}
+			else if (uniformType == "mat3")
+			{
+				glUniformMatrix3fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(pMaterial->getMatrix3(unprefixedName)));
+			}
+			else if (uniformType == "mat4")
+			{
+				glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(pMaterial->getMatrix4(unprefixedName)));
 			}
 		}
 		else if (uniformName.substr(0, 2) == "T_")

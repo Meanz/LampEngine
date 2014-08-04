@@ -6,7 +6,7 @@ LampScene::LampScene()
 {
 	m_pRootNode = new LampGameObject();
 	m_pMainCamera = new LampFreeCamera();
-	m_pMainCamera->perspective(60.0f, (float)Lamp::getWindow().getAspect(), 0.0f, 100.0f);
+	m_pMainCamera->perspective(60.0f, (float)Lamp::getWindow().getAspect(), 1.0f, 100.0f);
 }
 
 LampScene::~LampScene()
@@ -17,6 +17,11 @@ LampScene::~LampScene()
 void LampScene::setCamera(LampCamera* pCamera)
 {
 	m_pMainCamera = pCamera;
+}
+
+LampGameObject* LampScene::getRoot()
+{
+	return m_pRootNode;
 }
 
 LampCamera* LampScene::getCamera()
@@ -37,13 +42,10 @@ void LampScene::detatch(LampGameObject* child)
 void LampScene::onTick()
 {
 	m_pRootNode->doTick();
+	m_pMainCamera->onTick(); //Update camera :D
 }
 
 void LampScene::onFrame()
 {
-	//renderer->doRender();
-	//Bad lookup!
-	m_pMainCamera->onTick(); //Update camera :D
-
-	Lamp::getEngine().getRenderer()->render(m_pRootNode);
+	m_pRootNode->doFrame();
 }

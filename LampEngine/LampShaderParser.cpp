@@ -195,9 +195,6 @@ bool LampShaderParser::parse()
 	lua.registerFunction("addFragmentShader", LUA_addFragmentShader);
 	lua.registerFunction("addVertexShader", LUA_addVertexShader);
 	lua.registerFunction("getThisDir", LUA_getThisDir);
-
-	//Push globals
-	lua.setGlobal("ptrLua", (int)&lua);
 	lua.setGlobal("ptrLampShaderParser", (int)this);
 
 	//Call the lua file

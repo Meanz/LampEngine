@@ -126,6 +126,16 @@ void LampGameObject::doTick()
 	//Do culling in tick? 
 	//Yes please, less culling calls
 
+	//Update our transform
+
+	//Get parent transform matrix
+	mat4* ptrParentMatrix = NULL;
+	if (m_pParent != NULL)
+	{
+		ptrParentMatrix = m_transform.getGlobalPtr();
+	}
+	m_transform.calculateGlobal(ptrParentMatrix);
+
 	//Call our on tick function
 	onTick();
 

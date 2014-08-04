@@ -84,9 +84,11 @@
     <ClInclude Include="LampInput.hpp" />
     <ClInclude Include="LampLuaFunction.hpp" />
     <ClInclude Include="LampMaterialParser.hpp" />
+    <ClInclude Include="LampMWMLoader.hpp" />
     <ClInclude Include="LampPrefix.hpp" />
     <ClInclude Include="LampRenderer.hpp" />
     <ClInclude Include="LampScene.hpp" />
+    <ClInclude Include="LampScriptComponent.hpp" />
     <ClInclude Include="LampShader.hpp" />
     <ClInclude Include="LampShaderParser.hpp" />
     <ClInclude Include="LampTexture.hpp" />
@@ -108,9 +110,12 @@
     <ClCompile Include="LampEngine.cpp" />
     <ClCompile Include="LampGameObject.cpp" />
     <ClCompile Include="LampInput.cpp" />
+    <ClCompile Include="LampLua.cpp" />
     <ClCompile Include="LampMaterial.cpp" />
+    <ClCompile Include="LampMWMLoader.cpp" />
     <ClCompile Include="LampRenderer.cpp" />
     <ClCompile Include="LampScene.cpp" />
+    <ClCompile Include="LampScriptComponent.cpp" />
     <ClCompile Include="LampShader.cpp" />
     <ClCompile Include="LampShaderParser.cpp" />
     <ClCompile Include="LampTexture.cpp" />

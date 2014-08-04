@@ -39,50 +39,21 @@ namespace LampProject
 
 	public:
 
-		LampLua()
-		{
-			m_state = luaL_newstate();
+		LampLua();
 
-			//Load lua libraries seemingly
-			static const luaL_Reg lualibs[] =
-			{
-				{ "base", luaopen_base },
-				{ NULL, NULL }
-			};
-
-			//
-			const luaL_Reg *lib = lualibs;
-			for (; lib->func != NULL; lib++)
-			{
-				lib->func(m_state);
-				lua_settop(m_state, 0);
-			}
-
-		}
-
-		~LampLua()
-		{
-		}
+		~LampLua();
 
 		void close()
 		{
 			lua_close(m_state);
 		}
 
-		lua_State* getState()
-		{
-			return m_state;
-		}
+		lua_State* getState();
 
-		int doFile(std::string fileName)
-		{
-			return luaL_dofile(m_state, fileName.c_str());
-		}
-
-		void print()
-		{
-			printf("testhehe\n");
-		}
+		void loadFile(std::string fileName);
+		int doFile(std::string fileName);
+		void reportErrors(int status);
+		void print();
 
 		//##################
 		//# Util functions #
