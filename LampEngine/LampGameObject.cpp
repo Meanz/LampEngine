@@ -13,6 +13,11 @@ LampGameObject::~LampGameObject()
 
 }
 
+LampTransform* LampGameObject::getTransform()
+{
+	return &m_transform;
+}
+
 void LampGameObject::addComponent(LampNodeComponent* component)
 {
 	assert(component != NULL); //This would be silly :o

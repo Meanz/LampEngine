@@ -14,7 +14,7 @@ struct LampFileReadResult
 struct LampBinaryFileReadResult
 {
 	bool readComplete;
-	char* bytes;
+	std::vector<char> bytes;
 	int length;
 };
 
@@ -30,16 +30,21 @@ class LampBinaryBuffer
 {
 
 private:
-	std::vector<char> dataBuffer;
+	std::vector<char>* m_buffer;
+	int m_offset;
 
 public:
-	LampBinaryBuffer();
-
+	LampBinaryBuffer(std::vector<char>* _dataBuffer);
 	~LampBinaryBuffer();
 
 	unsigned getUInt();
-	int getInt();
-	char getByte();
+	float getFloat();
+	double getDouble();
+	int64_t getLong();
+	int32_t getInt();
+	int16_t getShort();
+	int8_t getByte();
+	void getBytes(char* _array, int length);
 	std::string getString();
 
 };

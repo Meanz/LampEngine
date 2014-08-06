@@ -54,6 +54,8 @@ namespace LampProject {
 		LampGameObject();
 		~LampGameObject();
 
+		LampTransform* getTransform();
+
 		void addComponent(LampNodeComponent* component);
 		void removeComponent(LampNodeComponent* component);
 		void removeComponent(LampNodeComponentType type);

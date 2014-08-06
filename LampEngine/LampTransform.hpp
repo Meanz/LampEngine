@@ -64,6 +64,22 @@ namespace LampProject
 			return position;
 		}
 
+		void setScale(float x, float y, float z)
+		{
+			scale.x = x;
+			scale.y = y;
+			scale.z = z;
+			flagChange();
+		}
+
+		void setScale(float f)
+		{
+			scale.x = f;
+			scale.y = f;
+			scale.z = f;
+			flagChange();
+		}
+
 		void setPosition(vec3 _position)
 		{
 			position = _position;
