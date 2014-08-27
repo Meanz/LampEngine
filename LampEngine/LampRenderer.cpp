@@ -13,6 +13,18 @@ LampRenderer::~LampRenderer()
 
 }
 
+void LampRenderer::setTransform(LampTransform* pTransform)
+{
+	m_pTransform = pTransform;
+}
+
+mat4& LampRenderer::getTransform()
+{
+	m_pWorldMatrix = new mat4();
+	*m_pWorldMatrix = (Lamp::getScene().getCamera()->getViewMatrix() * m_pTransform->getGlobal());
+	return *m_pWorldMatrix;
+}
+
 void LampRenderer::render(LampGameObject* pRenderNode)
 {
 	//Clear :D

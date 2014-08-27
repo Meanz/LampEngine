@@ -41,7 +41,7 @@ LampShaderType LampShader::getType()
 
 std::string LampShader::getTypeString()
 {
-	if (m_shaderType == LampShaderType::FRAGMENT) 
+	if (m_shaderType == LampShaderType::FRAGMENT)
 	{
 		return "FRAGMENT_SHADER";
 	}
@@ -52,7 +52,7 @@ std::string LampShader::getTypeString()
 	else if (m_shaderType == LampShaderType::GEOMETRY)
 	{
 		return "GEOMETRY_SHADER";
-	} 
+	}
 	else
 	{
 		return "UNKNOWN TYPE";
@@ -243,11 +243,11 @@ bool LampShaderProgram::compile(LampShaderMap shaderMap)
 	}
 	m_vShaders.clear();
 
-	
+
 
 	//Error checking
 	printf("########## SHADER LOG ##########\n");
-	if (compileFailed) 
+	if (compileFailed)
 	{
 		m_isCompiled = false;
 		printf("Unable to link program: \n%s\n", m_errorString.c_str());
@@ -263,7 +263,7 @@ bool LampShaderProgram::compile(LampShaderMap shaderMap)
 		for (unsigned int i = 0; i < m_shaderMap.uniformNames.size(); i++)
 		{
 			GLint loc = glGetUniformLocation(m_glId, m_shaderMap.uniformNames[i].c_str());
-			if (loc == -1) 
+			if (loc == -1)
 			{
 				printf("Could not find location for uniform %s\n", m_shaderMap.uniformNames[i].c_str());
 			}
@@ -390,8 +390,7 @@ void LampShaderProgram::updateUniforms(LampRenderer& renderer, LampMaterial* pMa
 			else if (unprefixedName == "world")
 			{
 				//Get the projection matrix from the camera
-				//Just for testing :D
-				glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(Lamp::getScene().getCamera()->getViewMatrix()));
+				glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(renderer.getTransform()));
 			}
 		}
 		else

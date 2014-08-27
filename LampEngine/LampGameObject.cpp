@@ -162,6 +162,8 @@ void LampGameObject::doFrame()
 {
 
 	//if is culled return;
+	//Give the renderer our transform
+	Lamp::getEngine().getRenderer()->setTransform(&m_transform);
 
 	//Call our on frame function
 	onFrame();

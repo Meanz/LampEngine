@@ -41,7 +41,7 @@ public:
 	float getFloat();
 	double getDouble();
 	int64_t getLong();
-	int32_t getInt();
+	int getInt();
 	int16_t getShort();
 	int8_t getByte();
 	void getBytes(char* _array, int length);

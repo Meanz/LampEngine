@@ -37,7 +37,7 @@ LampBinaryFileReadResult readBinaryFile(std::string filePath)
 {
 	LampBinaryFileReadResult fileReadResult;
 
-	std::ifstream file(filePath.c_str());
+	std::ifstream file(filePath.c_str(), std::ios::in | std::ios::binary);
 	if (!file.is_open())
 	{
 		fileReadResult.readComplete = false;
@@ -56,8 +56,22 @@ LampBinaryFileReadResult readBinaryFile(std::string filePath)
 	//Create our buffer
 	fileReadResult.bytes.resize(length);
 
+	char* tempBuffer = new char[length];
+
 	//
-	file.read(&fileReadResult.bytes[0], length);
+	file.read(tempBuffer, length);
+
+	if (file)
+		printf("All okay!");
+	else
+		printf("It went bad :(");
+		
+	for (int i = 0; i < length; i++)
+	{
+		fileReadResult.bytes[i] = tempBuffer[i];
+	}
+
+	delete[] tempBuffer;
 
 	//[vector header][vector data]
 	//[   0,    1,    2,   3...]
@@ -86,6 +100,12 @@ LampBinaryBuffer::~LampBinaryBuffer()
 
 int8_t LampBinaryBuffer::getByte()
 {
+	//Do out of bounds check
+	if (m_offset >= m_buffer->size())
+	{
+		assert(true);
+		assert(false);
+	}
 	return (*m_buffer)[m_offset++];
 }
 
@@ -108,17 +128,19 @@ float LampBinaryBuffer::getFloat()
 
 	mantissa |= 0x00800000;
 	// Calculate the result:
+
 	float f = (float)(sign * mantissa * pow(2, exponent - 150));
 	return f;
 }
 
 double LampBinaryBuffer::getDouble()
 {
-	int64_t bitPattern = getLong();// use this rather than long long because it is explicitly 64 bits
+	char temp[8];
+	getBytes(temp, 8);
+	int64_t bitPattern = (int64_t)temp;// use this rather than long long because it is explicitly 64 bits
 	//printf("%i bitPattern\n", bitPattern);
 	//std::cin.get();
 	double d = *(double*)&bitPattern;
-	printf("%f double\n", d);
 	return d;
 }
 
@@ -127,27 +149,27 @@ int64_t LampBinaryBuffer::getLong()
 	char temp[8];
 	getBytes(temp, 8);
 	return (int64_t)(
-		(int64_t)(temp[7])				<< 56		| 
-		(int64_t)(temp[6] & 0xff)		<< 48		| 
-		(int64_t)(temp[5] & 0xff)		<< 40		|
-		(int64_t)(temp[4] & 0xff)		<< 32		| 
-		(int64_t)(temp[3] & 0xff)		<< 24		| 
-		(int64_t)(temp[2] & 0xff)		<< 16		|
-		(int64_t)(temp[1] & 0xff)		<< 8		| 
-		(int64_t)(temp[0] & 0xff)		<< 0 
-	);
+		(int64_t)(temp[7]) << 56 |
+		(int64_t)(temp[6] & 0xff) << 48 |
+		(int64_t)(temp[5] & 0xff) << 40 |
+		(int64_t)(temp[4] & 0xff) << 32 |
+		(int64_t)(temp[3] & 0xff) << 24 |
+		(int64_t)(temp[2] & 0xff) << 16 |
+		(int64_t)(temp[1] & 0xff) << 8 |
+		(int64_t)(temp[0] & 0xff) << 0
+		);
 }
 
-int32_t LampBinaryBuffer::getInt()
+int LampBinaryBuffer::getInt()
 {
 	char temp[4];
 	getBytes(temp, 4);
-	return (int32_t)(
-		(int32_t)(temp[3])			<< 24	| 
-		(int32_t)(temp[2] & 0xff)	<< 16	|
-		(int32_t)(temp[1] & 0xff)	<< 8	|
-		(int32_t)(temp[0] & 0xff)	<< 0
-	);
+	return (
+		(temp[3] & 0xff) << 24 |
+		(temp[2] & 0xff) << 16 |
+		(temp[1] & 0xff) << 8 |
+		(temp[0] & 0xff)
+		);
 }
 
 int16_t LampBinaryBuffer::getShort()
@@ -155,9 +177,9 @@ int16_t LampBinaryBuffer::getShort()
 	char temp[2];
 	getBytes(temp, 2);
 	return (int16_t)(
-		(int16_t)(temp[1] & 0xff)	<< 8	| 
-		(int16_t)(temp[0] & 0xff)	<< 0
-	);
+		(int16_t)(temp[1] & 0xff) << 8 |
+		(int16_t)(temp[0] & 0xff) << 0
+		);
 }
 
 unsigned int LampBinaryBuffer::getUInt()

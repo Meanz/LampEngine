@@ -41,13 +41,13 @@ namespace LampProject
 		}
 
 		//Ge the local transform matrix for this transform
-		mat4 getLocal()
+		mat4& getLocal()
 		{
 			return local;
 		}
 
 		//Get the global transform matrix for this Transform
-		mat4 getGlobal()
+		mat4& getGlobal()
 		{
 			return global;
 		}
@@ -130,7 +130,7 @@ namespace LampProject
 			}
 
 			//Calculate local
-			local = glm::translate(mat4(1.0f), position) * glm::mat4_cast(rotation) * glm::scale(mat4(1.0f), scale);
+			local = glm::mat4_cast(rotation) * glm::translate(mat4(1.0f), position);
 
 			if (parent == NULL)
 			{

@@ -14,17 +14,16 @@ LampMWMLoader::~LampMWMLoader()
 
 inline vec3 LampMWMLoader::getVec3()
 {
-	float x = float(m_buffer->getDouble());
-	float y = float(m_buffer->getDouble());
-	float z = float(m_buffer->getDouble());
-	printf("x: %f, y: %f, z: %f \n", x, y, z);
+	float x = m_buffer->getFloat();
+	float y = m_buffer->getFloat();
+	float z = m_buffer->getFloat();
 	return vec3(x, y, z);
 }
 
 inline vec2 LampMWMLoader::getVec2()
 {
-	float x = m_buffer->getDouble();
-	float y = m_buffer->getDouble();
+	float x = m_buffer->getFloat();
+	float y = m_buffer->getFloat();
 	return vec2(x,y);
 }
 
@@ -43,6 +42,7 @@ LampMesh* LampMWMLoader::loadModel()
 	printf("Mesh: %s ... Version: %i\n", meshName.c_str(), version);
 
 	short numVertices = m_buffer->getShort();
+	printf("Num Vertices: %i\n", numVertices);
 	short numIndices = m_buffer->getShort();
 	bool hasNormals = m_buffer->getByte() == 1;
 	bool hasUVs = m_buffer->getByte() == 1;
@@ -105,8 +105,8 @@ LampMesh* LampMWMLoader::loadModel()
 
 			for (short j = 0; j < weightsPerBone; j++)
 			{
-				int boneId = m_buffer->getInt();
-				float weight = m_buffer->getDouble();
+				//int boneId = m_buffer->getInt();
+				//float weight = m_buffer->getDouble();
 			}
 		}
 
