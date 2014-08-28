@@ -130,6 +130,7 @@
     <ClCompile Include="LampShaderParser.cpp" />
     <ClCompile Include="LampTexture.cpp" />
     <ClCompile Include="LampMesh.cpp" />
+    <ClCompile Include="LampTypes.cpp" />
     <ClCompile Include="LampUtil.cpp" />
     <ClCompile Include="SDLWrapper.cpp" />
     <ClCompile Include="stdafx.cpp">

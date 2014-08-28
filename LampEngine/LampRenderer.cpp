@@ -69,6 +69,7 @@ void LampRenderer::render(LampGameObject* pRenderNode)
 	_itoa_s(Lamp::getEngine().getFPS(), buffer, 4);
 	fps.append(buffer);
 
+	Lamp::getGUI().getPainter().setColor(WHITE);
 	Lamp::getGUI().getPainter().drawString(fps, 10, 10);
 
 	Lamp::getScene().onGUI();

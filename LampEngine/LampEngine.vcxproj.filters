@@ -254,5 +254,8 @@
     <ClCompile Include="LampFontRenderer.cpp">
       <Filter>Source Files\Render</Filter>
     </ClCompile>
+    <ClCompile Include="LampTypes.cpp">
+      <Filter>Source Files\std</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

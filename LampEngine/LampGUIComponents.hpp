@@ -10,6 +10,7 @@ namespace LampProject
 	{
 
 	private:
+		bool hovering;
 
 	public:
 
@@ -19,6 +20,8 @@ namespace LampProject
 			Lamp::getAssetManager().loadTexture("gui_menu_left", "./data/ui/menu_bar_left.png");
 			Lamp::getAssetManager().loadTexture("gui_menu_middle", "./data/ui/menu_bar_middle.png");
 			Lamp::getAssetManager().loadTexture("gui_menu_right", "./data/ui/menu_bar_right.png");
+
+			hovering = false;
 		}
 
 		~LampGUI_Window()
@@ -26,10 +29,35 @@ namespace LampProject
 
 		}
 
+		void onTick()
+		{
+			//Check if the mouse is inside here :D
+			int mx = Lamp::getInput().getMouseX();
+			int my = Lamp::getInput().getMouseY();
+
+			if (mx >= 10 && mx <= 138 && my >= 50 && my <= 50 + 24)
+			{
+				hovering = true;
+			}
+			else
+			{
+				hovering = false;
+			}
+		}
+
 
 		void onDraw(LampGUIPainter& painter)
 		{
-			
+		
+
+			if (hovering)
+			{
+				painter.setColor(RED);
+			}
+			else
+			{
+				painter.setColor(WHITE);
+			}
 			painter.drawImage("gui_menu_left", 10, 50);
 			painter.drawImage("gui_menu_middle", 42, 50);
 			painter.drawImage("gui_menu_middle", 74, 50);

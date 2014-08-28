@@ -109,13 +109,13 @@ void LampEngine::loop()
 	while (m_isRunning)
 	{
 
-		if (GetTickCount64() - lastFPSTick > 1000)
+		if (SDL_GetTicks() - lastFPSTick > 1000)
 		{
 			m_FPS = tempFPS;
 			m_UPS = tempUPS;
 			tempFPS = 0;
 			tempUPS = 0;
-			lastFPSTick = GetTickCount64();
+			lastFPSTick = SDL_GetTicks();
 		}
 
 		loops = 0;

@@ -4,6 +4,7 @@
 LampGUIPainter::LampGUIPainter()
 {
 	m_FontInitialized = false;
+	m_Color = WHITE;
 }
 
 LampGUIPainter::~LampGUIPainter()
@@ -97,6 +98,9 @@ void LampGUIPainter::drawImage(LampTexture* pTexture, int x, int y)
 void LampGUIPainter::drawImage(LampTexture* pTexture, int x, int y, int width, int height)
 {
 
+	//Force coloring
+	applyColor(m_Color);
+
 	//Enable texturing
 	glEnable(GL_TEXTURE_2D);
 
@@ -110,10 +114,13 @@ void LampGUIPainter::drawImage(LampTexture* pTexture, int x, int y, int width, i
 
 void LampGUIPainter::drawString(std::string str, int x, int y)
 {
+	//Force coloring
+	applyColor(m_Color);
+
 	if (!m_FontInitialized)
 	{
 		//Initialize our default font :D
-		m_DefaultFont.loadFont("./data/fonts/FORTE.ttf", 12);
+		m_DefaultFont.loadFont("./data/fonts/ITCKRIST.ttf", 11);
 		m_FontInitialized = true;
 	}
 	m_DefaultFont.draw(str, x, y);

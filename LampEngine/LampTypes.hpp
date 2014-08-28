@@ -15,12 +15,12 @@ typedef glm::quat quat;
 #define UNIT_Z vec3(0.0f, 0.0f, 1.0f)
 
 //Some static colors
-#define RED LampColor(1.0f, 0.0f, 0.0f)
-#define GREEN LampColor(0.0f, 1.0f, 0.0f)
-#define BLUE LampColor(0.0f, 0.0f, 1.0f)
+#define RED LampColor(1.0f, 0.0f, 0.0f, 1.0f)
+#define GREEN LampColor(0.0f, 1.0f, 0.0f, 1.0f)
+#define BLUE LampColor(0.0f, 0.0f, 1.0f, 1.0f)
 
-#define WHITE LampColor(1.0f, 1.0f, 1.0f)
-#define BLACK LampColor(0.0f, 0.0f, 0.0f)
+#define WHITE LampColor(1.0f, 1.0f, 1.0f, 1.0f)
+#define BLACK LampColor(0.0f, 0.0f, 0.0f, 1.0f)
 
 union LampColor
 {
@@ -43,7 +43,7 @@ union LampColor
 		components[0] = 0.0f;
 		components[1] = 0.0f;
 		components[2] = 0.0f;
-		components[3] = 0.0f;
+		components[3] = 1.0f;
 	}
 
 	LampColor(float r, float g, float b, float a)
@@ -59,10 +59,12 @@ union LampColor
 		components[0] = r;
 		components[1] = g;
 		components[2] = b;
-		components[3] = 0.0f;
+		components[3] = 1.0f;
 	};
 
 };
+
+void applyColor(LampColor& c);
 
 struct Area
 {

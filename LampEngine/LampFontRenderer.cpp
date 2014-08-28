@@ -28,7 +28,7 @@ namespace LampProject {
 			throw std::runtime_error("FT_Get_Glyph failed");
 
 		//Convert the glyph to a bitmap.
-		FT_Glyph_To_Bitmap(&glyph, ft_render_mode_normal, 0, 1);
+		FT_Glyph_To_Bitmap(&glyph, FT_Render_Mode::FT_RENDER_MODE_NORMAL, 0, 1);
 		FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph)glyph;
 
 		//This reference will make accessing the bitmap easier
@@ -51,7 +51,7 @@ namespace LampProject {
 		//We use the ?: operator so that value which we use
 		//will be 0 if we are in the padding zone, and whatever
 		//is the the Freetype bitmap otherwise.
-		for (int j = 0; j < height; j++) {
+		for (int j = height - 1; j >= 0; j--) {
 			for (int i = 0; i < width; i++){
 				expanded_data[2 * (i + j*width)] = expanded_data[2 * (i + j*width) + 1] =
 					(i >= bitmap.width || j >= bitmap.rows) ?
@@ -98,8 +98,8 @@ namespace LampProject {
 		//the x and y variables, then when we draw the
 		//quad, we will only reference the parts of the texture
 		//that we contain the character itself.
-		float	x = (float)bitmap.width / (float)width,
-			y = (float)bitmap.rows / (float)height;
+		float x = (float) bitmap.width / (float) width;
+		float y = (float) bitmap.rows / (float) height;
 
 		//Here we draw the texturemaped quads.
 		//The bitmap that we got from FreeType was not 
@@ -200,7 +200,6 @@ namespace LampProject {
 		//glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 		//This is where the text display actually happens.
 		//For each line of text we reset the modelview matrix
