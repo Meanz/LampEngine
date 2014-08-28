@@ -2,6 +2,7 @@
 
 #include "LampGameObject.hpp"
 #include "LampCamera.hpp"
+#include "LampGUI.hpp"
 
 namespace LampProject {
 
@@ -12,6 +13,7 @@ namespace LampProject {
 
 		LampGameObject* m_pRootNode;
 		LampCamera* m_pMainCamera; //This will be constructed in the constructor
+		LampGUI* m_pGUI;
 
 	public:
 
@@ -21,6 +23,7 @@ namespace LampProject {
 		void setCamera(LampCamera* pCamera);
 		LampCamera* getCamera();
 		LampGameObject* getRoot();
+		LampGUI* getGUI();
 
 		void attach(LampGameObject* child);
 		void detatch(LampGameObject* child);

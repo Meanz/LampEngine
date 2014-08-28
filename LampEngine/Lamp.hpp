@@ -112,6 +112,11 @@ namespace LampProject {
 			return *getEngine().getScene();
 		}
 
+		static LampGUI& getGUI()
+		{
+			return *getScene().getGUI();
+		}
+
 		//Get a reference to the LampEngine
 		static LampEngine& getEngine()
 		{

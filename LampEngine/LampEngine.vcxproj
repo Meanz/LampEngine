@@ -74,6 +74,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="LampGUIPainter.hpp" />
+    <ClInclude Include="LampComponent.hpp" />
+    <ClInclude Include="LampGUI.hpp" />
     <ClInclude Include="LampMaterial.hpp" />
     <ClInclude Include="LampAssetManager.hpp" />
     <ClInclude Include="Lamp.hpp" />
@@ -107,8 +110,10 @@
     <ClCompile Include="LampAssetManager.cpp" />
     <ClCompile Include="Lamp.cpp" />
     <ClCompile Include="LampCamera.cpp" />
+    <ClCompile Include="LampComponent.cpp" />
     <ClCompile Include="LampEngine.cpp" />
     <ClCompile Include="LampGameObject.cpp" />
+    <ClCompile Include="LampGUI.cpp" />
     <ClCompile Include="LampInput.cpp" />
     <ClCompile Include="LampLua.cpp" />
     <ClCompile Include="LampMaterial.cpp" />

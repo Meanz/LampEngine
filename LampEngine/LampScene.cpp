@@ -7,11 +7,14 @@ LampScene::LampScene()
 	m_pRootNode = new LampGameObject();
 	m_pMainCamera = new LampFreeCamera();
 	m_pMainCamera->perspective(60.0f, (float)Lamp::getWindow().getAspect(), 1.0f, 100.0f);
+	m_pGUI = new LampGUI();
 }
 
 LampScene::~LampScene()
 {
 	delete m_pRootNode;
+	delete m_pMainCamera;
+	delete m_pGUI;
 }
 
 void LampScene::setCamera(LampCamera* pCamera)
@@ -27,6 +30,11 @@ LampGameObject* LampScene::getRoot()
 LampCamera* LampScene::getCamera()
 {
 	return m_pMainCamera;
+}
+
+LampGUI* LampScene::getGUI()
+{
+	return m_pGUI;
 }
 
 void LampScene::attach(LampGameObject* child)

@@ -24,7 +24,7 @@ namespace LampProject
 	public:
 
 		//Cool initializer, didn't know they had these = default value things.
-		LampTransform(vec3 _position = vec3(), quat _rotation = quat(), vec3 _scale = vec3(1.0f)) :
+		LampTransform(vec3 _position = vec3(), quat _rotation = quat(1.0f, 0.0f, 0.0f, 0.0f), vec3 _scale = vec3(1.0f)) :
 			position(_position),
 			rotation(_rotation),
 			scale(_scale),
@@ -130,7 +130,7 @@ namespace LampProject
 			}
 
 			//Calculate local
-			local = glm::mat4_cast(rotation) * glm::translate(mat4(1.0f), position);
+			local = glm::translate(mat4(1.0f), position) * glm::mat4_cast(rotation);
 
 			if (parent == NULL)
 			{

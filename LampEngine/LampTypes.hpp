@@ -38,6 +38,14 @@ union LampColor
 		float components[4];
 	};
 
+	LampColor()
+	{
+		components[0] = 0.0f;
+		components[1] = 0.0f;
+		components[2] = 0.0f;
+		components[3] = 0.0f;
+	}
+
 	LampColor(float r, float g, float b, float a)
 	{
 		components[0] = r;
@@ -53,5 +61,31 @@ union LampColor
 		components[2] = b;
 		components[3] = 0.0f;
 	};
+
+};
+
+struct Area
+{
+
+	int x;
+	int y;
+	int width;
+	int height;
+
+	//Default ctor
+	Area()
+	{
+		x = 0;
+		y = 0;
+		width = 0;
+		height = 0;
+	}
+
+	Area(int _x, int _y, int _width, int _height) : x(_x), y(_y), width(_width), height(_height) {}
+
+	~Area()
+	{
+		//No pointers? So we don't need this?
+	}
 
 };
