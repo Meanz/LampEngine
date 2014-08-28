@@ -51,8 +51,11 @@ namespace LampProject
 		//Set the area of this component
 		void setArea(Area area);
 
-		void update();
-		void draw(LampGUIPainter& pPainter);
+		virtual void onTick() {};
+		virtual void onDraw(LampGUIPainter& pPainter) {};
+
+		void doTick();
+		void doDraw(LampGUIPainter& pPainter);
 
 	};
 

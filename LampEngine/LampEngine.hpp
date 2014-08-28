@@ -29,6 +29,8 @@ namespace LampProject {
 
 		//Whether the engine is running or not
 		bool m_isRunning;
+		int m_FPS;
+		int m_UPS;
 
 		//The core loop
 		void loop();
@@ -69,6 +71,9 @@ namespace LampProject {
 		{
 			return m_pAssetManager;
 		}
+
+		int getFPS();
+		int getUPS();
 
 		//Starts the engine
 		void start();

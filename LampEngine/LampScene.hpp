@@ -29,8 +29,7 @@ namespace LampProject {
 		void detatch(LampGameObject* child);
 
 		void onTick(); //called to update the scene
-		void onFrame(); //called to render the scene
-
+		void onGUI();
 	};
 
 

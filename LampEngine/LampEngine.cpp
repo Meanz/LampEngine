@@ -9,7 +9,9 @@ m_pAssetManager(0),
 m_pRenderer(0),
 m_pScene(0),
 m_pInput(0),
-m_pWindow(0)
+m_pWindow(0),
+m_FPS(0),
+m_UPS(0)
 {
 	//Create our SDLWrapper
 	SDLConfig _config;
@@ -53,6 +55,16 @@ LampEngine::~LampEngine()
 	Lamp::onEngineQuit();
 }
 
+int LampEngine::getFPS()
+{
+	return m_FPS;
+}
+
+int LampEngine::getUPS()
+{
+	return m_UPS;
+}
+
 void LampEngine::start()
 {
 	m_isRunning = true;
@@ -87,11 +99,24 @@ void LampEngine::loop()
 	const int MAX_FRAME_SKIP = 100;
 
 	DWORD64 nextTick = GetTickCount64();
+	DWORD64 lastFPSTick = GetTickCount64();
+
+	int tempFPS = 0;
+	int tempUPS = 0;
 
 	//While application is running
 	int loops;
 	while (m_isRunning)
 	{
+
+		if (GetTickCount64() - lastFPSTick > 1000)
+		{
+			m_FPS = tempFPS;
+			m_UPS = tempUPS;
+			tempFPS = 0;
+			tempUPS = 0;
+			lastFPSTick = GetTickCount64();
+		}
 
 		loops = 0;
 		while (GetTickCount64() > nextTick && loops < MAX_FRAME_SKIP)
@@ -102,6 +127,7 @@ void LampEngine::loop()
 
 			nextTick += SKIP_TICKS;
 			loops++;
+			tempUPS++;
 		}
 
 		//check if the game has frozen
@@ -128,6 +154,8 @@ void LampEngine::loop()
 
 		//Update screen
 		m_pWrapper->swapBuffers();
+
+		tempFPS++;
 	}
 
 	//Disable text input

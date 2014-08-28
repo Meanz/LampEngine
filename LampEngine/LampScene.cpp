@@ -51,9 +51,10 @@ void LampScene::onTick()
 {
 	m_pRootNode->doTick();
 	m_pMainCamera->onTick(); //Update camera :D
+	m_pGUI->onTick();
 }
 
-void LampScene::onFrame()
+void LampScene::onGUI()
 {
-	m_pRootNode->doFrame();
+	m_pGUI->onFrame();
 }

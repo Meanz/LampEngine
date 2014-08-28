@@ -90,7 +90,7 @@ namespace LampProject
 		return false;
 	}
 
-	void LampComponent::update()
+	void LampComponent::doTick()
 	{
 		//Handle input ?
 
@@ -120,10 +120,29 @@ namespace LampProject
 			m_vChildren.push_back(m_vAddQueue[i]);
 		}
 		m_vAddQueue.clear();
+
+		//Update this component
+		onTick();
+
+		//Signal all children to update!
+		for (unsigned int i = 0; i < m_vChildren.size(); i++)
+		{
+			m_vChildren[i]->doTick();
+		}
 	}
 
-	void LampComponent::draw(LampGUIPainter& pPainter)
+
+
+	void LampComponent::doDraw(LampGUIPainter& painter)
 	{
-		//Handling drawing!?
+
+		//Draw this component
+		onDraw(painter);
+
+		//Signal all children to draw!
+		for (unsigned int i = 0; i < m_vChildren.size(); i++)
+		{
+			m_vChildren[i]->doDraw(painter);
+		}
 	}
 }

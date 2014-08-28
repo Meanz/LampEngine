@@ -23,8 +23,8 @@ namespace LampProject
 			{
 				LampTexture* texture = new LampTexture();
 				texture->generateGLId();
-				texture->m_width = surface->w;
-				texture->m_height = surface->h;
+				texture->m_Width = surface->w;
+				texture->m_Height = surface->h;
 
 				if (!texture->isValid())
 				{
@@ -43,12 +43,14 @@ namespace LampProject
 				}
 				else if (surface->format->format == SDL_PIXELFORMAT_RGBA4444
 					|| surface->format->format == SDL_PIXELFORMAT_RGBA5551
-					|| surface->format->format == SDL_PIXELFORMAT_RGBA8888)
+					|| surface->format->format == SDL_PIXELFORMAT_RGBA8888
+					|| surface->format->format == SDL_PIXELFORMAT_ABGR8888)
 				{
 					texture->m_Format = LampImageFormat::RGBA;
 				}
 				else {
 					printf("The fuck, pixel format is not recognized?\n");
+					printf("Format: %i\n", surface->format->format);
 					SDL_FreeSurface(surface);
 					delete texture;
 					return NULL;
@@ -57,7 +59,7 @@ namespace LampProject
 				//Temp way of doing it :p
 				glEnable(GL_TEXTURE_2D);
 				glBindTexture(GL_TEXTURE_2D, texture->getGLId());
-				glTexImage2D(GL_TEXTURE_2D, 0, texture->m_Format, texture->m_width, texture->m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
+				glTexImage2D(GL_TEXTURE_2D, 0, texture->m_Format, texture->m_Width, texture->m_Height, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 

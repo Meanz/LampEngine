@@ -6,7 +6,7 @@
 namespace LampProject 
 {
 
-	class LampGUI : public LampGameObject
+	class LampGUI
 	{
 
 	private:
@@ -21,9 +21,14 @@ namespace LampProject
 		LampGUI();
 		~LampGUI();
 
+		LampGUIPainter& getPainter();
+
+		void add(LampComponent* pComponent);
+		void remove(LampComponent* pComponent);
+
 		//This be very important mr houston
-		virtual void onTick();
-		virtual void onFrame();
+		void onTick();
+		void onFrame();
 
 	};
 

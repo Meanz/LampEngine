@@ -19,8 +19,8 @@ namespace LampProject
 		
 		//The internal format of this Texture
 		LampImageFormat m_Format;
-		GLuint m_width;
-		GLuint m_height;
+		GLuint m_Width;
+		GLuint m_Height;
 		std::string m_id; //The string id of the texture
 
 		LampTexture();

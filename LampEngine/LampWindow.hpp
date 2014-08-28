@@ -7,8 +7,8 @@ namespace LampProject
 	class LampWindow
 	{
 	private:
-		int m_width;
-		int m_height;
+		int m_Width;
+		int m_Height;
 		std::string m_title;
 
 		SDL_Window* m_pSDL_Window;
@@ -16,8 +16,8 @@ namespace LampProject
 	public:
 
 		LampWindow(int width, int height, std::string title, SDL_Window* pSDL_Window) :
-			m_width(width),
-			m_height(height),
+			m_Width(width),
+			m_Height(height),
 			m_title(title),
 			m_pSDL_Window(pSDL_Window)
 		{
@@ -26,27 +26,27 @@ namespace LampProject
 
 		int getWidth() 
 		{
-			return m_width;
+			return m_Width;
 		}
 
 		int getHeight()
 		{
-			return m_height;
+			return m_Height;
 		}
 
 		int getCenterX()
 		{
-			return m_width / 2;
+			return m_Width / 2;
 		}
 
 		int getCenterY()
 		{
-			return m_height / 2;
+			return m_Height / 2;
 		}
 
 		double getAspect()
 		{
-			return (double)m_width / (double)m_height;
+			return (double)m_Width / (double)m_Height;
 		}
 
 		SDL_Window* getSDLWindow()

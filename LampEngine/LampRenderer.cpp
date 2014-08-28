@@ -49,4 +49,27 @@ void LampRenderer::render(LampGameObject* pRenderNode)
 
 	//Render all nodes
 	pRenderNode->doFrame();
+
+	//Do GUI Rendering
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0.0f, Lamp::getWindow().getWidth(), Lamp::getWindow().getHeight(), 0.0f);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	
+	//Disable depth testing
+	//Enable Texturing
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_DEPTH_TEST);
+
+	//Draw debug!
+	std::string fps = "FPS: ";
+	
+	char buffer[8];
+	_itoa_s(Lamp::getEngine().getFPS(), buffer, 4);
+	fps.append(buffer);
+
+	Lamp::getGUI().getPainter().drawString(fps, 10, 10);
+
+	Lamp::getScene().onGUI();
 }

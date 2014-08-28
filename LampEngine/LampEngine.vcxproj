@@ -40,8 +40,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Projects\C++\3rdparty\glm;D:\Projects\C++\3rdparty\sdl\include;D:\Projects\C++\3rdparty\glew-1.10.0\include;D:\Projects\C++\Lua\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Projects\C++\3rdparty\sdl\lib\x86;D:\Projects\C++\3rdparty\glew-1.10.0\lib\Release\Win32;D:\Projects\C++\LampEngine\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Projects\C++\3rdparty\glm;D:\Projects\C++\3rdparty\sdl\include;D:\Projects\C++\3rdparty\glew-1.10.0\include;D:\Projects\C++\Lua\include;D:\Projects\C++\3rdparty\freetype-2.4.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Projects\C++\3rdparty\sdl\lib\x86;D:\Projects\C++\3rdparty\glew-1.10.0\lib\Release\Win32;D:\Projects\C++\LampEngine\Debug;D:\Projects\C++\3rdparty\freetype-2.4.0\objs\win32\vc2008;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -74,6 +74,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="LampFont.hpp" />
+    <ClInclude Include="LampFontRenderer.hpp" />
+    <ClInclude Include="LampGUIComponents.hpp" />
     <ClInclude Include="LampGUIPainter.hpp" />
     <ClInclude Include="LampComponent.hpp" />
     <ClInclude Include="LampGUI.hpp" />
@@ -112,8 +115,10 @@
     <ClCompile Include="LampCamera.cpp" />
     <ClCompile Include="LampComponent.cpp" />
     <ClCompile Include="LampEngine.cpp" />
+    <ClCompile Include="LampFontRenderer.cpp" />
     <ClCompile Include="LampGameObject.cpp" />
     <ClCompile Include="LampGUI.cpp" />
+    <ClCompile Include="LampGUIPainter.cpp" />
     <ClCompile Include="LampInput.cpp" />
     <ClCompile Include="LampLua.cpp" />
     <ClCompile Include="LampMaterial.cpp" />

@@ -15,11 +15,26 @@ LampGUI::~LampGUI()
 	delete m_pWindow;
 }
 
+LampGUIPainter& LampGUI::getPainter()
+{
+	return m_Painter;
+}
+
+void LampGUI::add(LampComponent* pComponent)
+{
+	m_pWindow->add(pComponent);
+}
+
+void LampGUI::remove(LampComponent* pComponent)
+{
+	m_pWindow->remove(pComponent);
+}
+
 void LampGUI::onTick()
 {
 
 	//Tell our main component to update all it's sub components
-	m_pWindow->update();
+	m_pWindow->doTick();
 
 }
 
@@ -27,6 +42,6 @@ void LampGUI::onFrame()
 {
 
 	//Tell our main component that it's drawing time :D
-	m_pWindow->draw(m_Painter);
+	m_pWindow->doDraw(m_Painter);
 
 }
