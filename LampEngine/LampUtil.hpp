@@ -31,7 +31,7 @@ class LampBinaryBuffer
 
 private:
 	std::vector<char>* m_buffer;
-	int m_offset;
+	unsigned int m_offset;
 
 public:
 	LampBinaryBuffer(std::vector<char>* _dataBuffer);

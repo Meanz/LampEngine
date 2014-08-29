@@ -104,7 +104,30 @@ namespace LampProject
 		void compile();
 
 		//Renders this mesh
-		void render();
+		virtual void render();
+	};
+
+
+	//The idea here is that a skeletal mesh is an extension of the "mesh"
+	//Basically the old, compile functions and such of the mesh are still
+	//Contained in the "Mesh" class, but the new things such as the Skeleton
+	//Is now being handled with the mesh, so for example
+	//On draw call the SkeletalMesh overrides the draw function of the mesh
+	//And deals with it appropriately
+	class LampSkeletalMesh : public LampMesh
+	{
+
+	private:
+
+	public:
+
+
+		//HMm
+		virtual void render()
+		{
+
+		}
+
 	};
 
 

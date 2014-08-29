@@ -183,6 +183,12 @@
     <ClInclude Include="LampFont.hpp">
       <Filter>Header Files\Render</Filter>
     </ClInclude>
+    <ClInclude Include="LampModelLoader.hpp">
+      <Filter>Header Files\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="LampModel.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -257,5 +263,16 @@
     <ClCompile Include="LampTypes.cpp">
       <Filter>Source Files\std</Filter>
     </ClCompile>
+    <ClCompile Include="LampSkeleton.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="LampModelLoader.cpp">
+      <Filter>Source Files\Asset</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LampSkeleton.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </None>
   </ItemGroup>
 </Project>

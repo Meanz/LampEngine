@@ -135,6 +135,7 @@ void LampMesh::compile()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 		//Only compile with vbo's that's odd!
+		//We like them vertex arrays!
 		if (m_compileMode == LampMeshCompileMode::COMPILE_VAO)
 		{
 			glGenVertexArrays(1, &m_vao);

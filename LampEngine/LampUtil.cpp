@@ -88,7 +88,8 @@ LampBinaryFileReadResult readBinaryFile(std::string filePath)
 }
 
 LampBinaryBuffer::LampBinaryBuffer(std::vector<char>* _buffData) :
-m_buffer(_buffData)
+m_buffer(_buffData),
+m_offset(0)
 {
 
 }

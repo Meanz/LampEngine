@@ -32,6 +32,12 @@ LampMesh* LampMWMLoader::loadModel()
 
 	//Read file :D
 	LampBinaryFileReadResult readResult = readBinaryFile(m_filePath);
+
+	if (!readResult.readComplete)
+	{
+		return NULL;
+	}
+
 	m_buffer = new LampBinaryBuffer(&readResult.bytes);
 
 

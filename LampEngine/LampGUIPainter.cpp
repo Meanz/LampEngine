@@ -108,7 +108,7 @@ void LampGUIPainter::drawImage(LampTexture* pTexture, int x, int y, int width, i
 	pTexture->bind();
 
 	//Draw our quad
-	drawQuad(x, y, width, height);
+	drawQuad(float(x), float(y), float(width), float(height));
 
 }
 
@@ -123,7 +123,7 @@ void LampGUIPainter::drawString(std::string str, int x, int y)
 		m_DefaultFont.loadFont("./data/fonts/ITCKRIST.ttf", 11);
 		m_FontInitialized = true;
 	}
-	m_DefaultFont.draw(str, x, y);
+	m_DefaultFont.draw(str, float(x), float(y));
 }
 
 

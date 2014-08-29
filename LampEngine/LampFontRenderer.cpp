@@ -184,6 +184,8 @@ namespace LampProject {
 
 		//Ditto for the library.
 		FT_Done_FreeType(library);
+
+		return true;
 	}
 
 	void LampFont::deleteFont()

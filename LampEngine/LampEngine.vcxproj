@@ -40,7 +40,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Projects\C++\3rdparty\glm;D:\Projects\C++\3rdparty\sdl\include;D:\Projects\C++\3rdparty\glew-1.10.0\include;D:\Projects\C++\Lua\include;D:\Projects\C++\3rdparty\freetype-2.4.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Projects\C++\3rdparty\glm;D:\Projects\C++\3rdparty\sdl\include;D:\Projects\C++\3rdparty\glew-1.10.0\include;D:\Projects\C++\Lua\include;D:\Projects\C++\3rdparty\freetype-2.4.0\include;D:\Projects\C++\3rdparty\rapidxml-1.13\;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Projects\C++\3rdparty\sdl\lib\x86;D:\Projects\C++\3rdparty\glew-1.10.0\lib\Release\Win32;D:\Projects\C++\LampEngine\Debug;D:\Projects\C++\3rdparty\freetype-2.4.0\objs\win32\vc2008;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -90,6 +90,8 @@
     <ClInclude Include="LampInput.hpp" />
     <ClInclude Include="LampLuaFunction.hpp" />
     <ClInclude Include="LampMaterialParser.hpp" />
+    <ClInclude Include="LampModel.hpp" />
+    <ClInclude Include="LampModelLoader.hpp" />
     <ClInclude Include="LampMWMLoader.hpp" />
     <ClInclude Include="LampPrefix.hpp" />
     <ClInclude Include="LampRenderer.hpp" />
@@ -122,12 +124,14 @@
     <ClCompile Include="LampInput.cpp" />
     <ClCompile Include="LampLua.cpp" />
     <ClCompile Include="LampMaterial.cpp" />
+    <ClCompile Include="LampModelLoader.cpp" />
     <ClCompile Include="LampMWMLoader.cpp" />
     <ClCompile Include="LampRenderer.cpp" />
     <ClCompile Include="LampScene.cpp" />
     <ClCompile Include="LampScriptComponent.cpp" />
     <ClCompile Include="LampShader.cpp" />
     <ClCompile Include="LampShaderParser.cpp" />
+    <ClCompile Include="LampSkeleton.cpp" />
     <ClCompile Include="LampTexture.cpp" />
     <ClCompile Include="LampMesh.cpp" />
     <ClCompile Include="LampTypes.cpp" />
@@ -137,6 +141,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LampSkeleton.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
