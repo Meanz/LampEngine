@@ -74,6 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="LampActor.hpp" />
     <ClInclude Include="LampFont.hpp" />
     <ClInclude Include="LampFontRenderer.hpp" />
     <ClInclude Include="LampGUIComponents.hpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="LampInput.hpp" />
     <ClInclude Include="LampLuaFunction.hpp" />
     <ClInclude Include="LampMaterialParser.hpp" />
+    <ClInclude Include="LampMeshRenderer.hpp" />
     <ClInclude Include="LampModel.hpp" />
     <ClInclude Include="LampModelLoader.hpp" />
     <ClInclude Include="LampMWMLoader.hpp" />
@@ -99,6 +101,7 @@
     <ClInclude Include="LampScriptComponent.hpp" />
     <ClInclude Include="LampShader.hpp" />
     <ClInclude Include="LampShaderParser.hpp" />
+    <ClInclude Include="LampSkeletalMeshRenderer.hpp" />
     <ClInclude Include="LampTexture.hpp" />
     <ClInclude Include="LampTextureLoader.hpp" />
     <ClInclude Include="LampTypes.hpp" />
@@ -112,6 +115,7 @@
     <ClInclude Include="LampTransform.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LampActor.cpp" />
     <ClCompile Include="LampAssetManager.cpp" />
     <ClCompile Include="Lamp.cpp" />
     <ClCompile Include="LampCamera.cpp" />

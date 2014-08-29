@@ -10,7 +10,7 @@ typedef LampInput Input;
 //Scene Components
 typedef LampScene Scene;
 typedef LampGameObject GameObject;
-typedef LampMeshRenderer MeshRenderer;
+//typedef LampMeshRenderer MeshRenderer;
 
 //Components
 typedef LampColor Color;

@@ -37,18 +37,6 @@
     <Filter Include="Source Files\Material">
       <UniqueIdentifier>{854ba767-d2bf-4461-bfa1-f2e315a7d82e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Render">
-      <UniqueIdentifier>{39f14b5e-db53-45d5-9b56-27053e462fee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Render">
-      <UniqueIdentifier>{da2f8f41-cacd-434b-8af8-9bd1bd066a6a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Geometry">
-      <UniqueIdentifier>{b3138a88-e2b9-4ccc-8291-64b8f3bbca0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Geometry">
-      <UniqueIdentifier>{46401e0c-6a9d-4679-8fbc-fd982ff0d583}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Scene">
       <UniqueIdentifier>{cbe69192-db30-4844-9ef7-580d05099763}</UniqueIdentifier>
     </Filter>
@@ -78,6 +66,30 @@
     </Filter>
     <Filter Include="Source Files\GUI">
       <UniqueIdentifier>{dcd04f81-7934-44ff-9d05-397f938af9d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{070d137f-7092-4cc5-bb18-32d3b853db37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Actor">
+      <UniqueIdentifier>{4e853873-964d-440b-9e89-f9928f4fb55f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{332d5da3-e9a5-4f19-ba5c-1b308a8a1af7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Actor">
+      <UniqueIdentifier>{532ed746-4fd9-4524-864c-25e156c49c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Mesh">
+      <UniqueIdentifier>{f2649eef-c5e5-4522-8893-f4b6a7d337ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Render">
+      <UniqueIdentifier>{39f14b5e-db53-45d5-9b56-27053e462fee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Render">
+      <UniqueIdentifier>{da2f8f41-cacd-434b-8af8-9bd1bd066a6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mesh">
+      <UniqueIdentifier>{43e0f8a3-cac8-440d-983b-5f88769f2f0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,13 +127,10 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="LampRenderer.hpp">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
     <ClInclude Include="LampTypes.hpp">
       <Filter>Header Files\std</Filter>
-    </ClInclude>
-    <ClInclude Include="LampMesh.hpp">
-      <Filter>Header Files\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="LampCamera.hpp">
       <Filter>Header Files\Scene</Filter>
@@ -162,9 +171,6 @@
     <ClInclude Include="LampScriptComponent.hpp">
       <Filter>Header Files\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="LampMWMLoader.hpp">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="LampComponent.hpp">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
@@ -178,16 +184,31 @@
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
     <ClInclude Include="LampFontRenderer.hpp">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
     <ClInclude Include="LampFont.hpp">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
     <ClInclude Include="LampModelLoader.hpp">
       <Filter>Header Files\Asset</Filter>
     </ClInclude>
+    <ClInclude Include="LampActor.hpp">
+      <Filter>Header Files\Game\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="LampMesh.hpp">
+      <Filter>Header Files\Mesh</Filter>
+    </ClInclude>
     <ClInclude Include="LampModel.hpp">
-      <Filter>Header Files\Geometry</Filter>
+      <Filter>Header Files\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="LampMWMLoader.hpp">
+      <Filter>Header Files\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="LampMeshRenderer.hpp">
+      <Filter>Header Files\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="LampSkeletalMeshRenderer.hpp">
+      <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -210,10 +231,7 @@
       <Filter>Source Files\Asset</Filter>
     </ClCompile>
     <ClCompile Include="LampRenderer.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="LampMesh.cpp">
-      <Filter>Source Files\Geometry</Filter>
+      <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
     <ClCompile Include="LampScene.cpp">
       <Filter>Source Files\Scene</Filter>
@@ -245,9 +263,6 @@
     <ClCompile Include="LampScriptComponent.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="LampMWMLoader.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="LampComponent.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
@@ -258,21 +273,30 @@
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
     <ClCompile Include="LampFontRenderer.cpp">
-      <Filter>Source Files\Render</Filter>
+      <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
     <ClCompile Include="LampTypes.cpp">
       <Filter>Source Files\std</Filter>
     </ClCompile>
-    <ClCompile Include="LampSkeleton.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="LampModelLoader.cpp">
       <Filter>Source Files\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="LampActor.cpp">
+      <Filter>Source Files\Game\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="LampMesh.cpp">
+      <Filter>Source Files\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="LampMWMLoader.cpp">
+      <Filter>Source Files\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="LampSkeleton.cpp">
+      <Filter>Source Files\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LampSkeleton.hpp">
-      <Filter>Header Files\Geometry</Filter>
+      <Filter>Header Files\Mesh</Filter>
     </None>
   </ItemGroup>
 </Project>

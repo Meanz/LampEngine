@@ -109,7 +109,7 @@ namespace LampProject
 			//Granted "the fastest" is a bad use of words
 			//So, is there any obvious faster ways?
 			//I suck at assembly so don't even challenge me here.
-			quat newQuat = glm::angleAxis(angle, axis);
+			quat newQuat = glm::angleAxis(glm::radians(angle), axis);
 			rotation = rotation * newQuat;
 			flagChange();
 		}
@@ -130,7 +130,13 @@ namespace LampProject
 			}
 
 			//Calculate local
-			local = glm::translate(mat4(1.0f), position) * glm::mat4_cast(rotation);
+			mat4 _r = glm::mat4_cast(rotation);
+			mat4 _t = glm::translate(mat4(1.0f), position);
+			mat4 _s = glm::scale(mat4(1.0f), scale);
+
+			local = _r * _t * _s;
+
+			//local = glm::translate(mat4(1.0f), position) * glm::mat4_cast(rotation);
 
 			if (parent == NULL)
 			{

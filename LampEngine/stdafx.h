@@ -38,6 +38,10 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
+//Some cool things
+using std::vector;
+using std::string;
+
 //Utility class
 #include "LampUtil.hpp"
 

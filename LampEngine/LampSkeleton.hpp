@@ -8,7 +8,7 @@ namespace LampProject
 	struct LampBone
 	{
 		GLuint boneId;
-		std::string boneName;
+		string boneName;
 		mat4 identityMatrix;
 		mat4 offsetMatrix;
 	};
@@ -19,8 +19,8 @@ namespace LampProject
 	
 	private:
 
-		std::vector<LampBone> m_vBoneList;
-		std::vector<mat4> m_vBoneTransforms;
+		vector<LampBone> m_vBoneList;
+		vector<mat4> m_vBoneTransforms;
 
 	public:
 
@@ -40,6 +40,8 @@ namespace LampProject
 
 	private:
 	public:
+
+		string getName();
 
 	};
 
