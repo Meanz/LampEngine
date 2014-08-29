@@ -73,4 +73,5 @@ void LampRenderer::render(LampGameObject* pRenderNode)
 	Lamp::getGUI().getPainter().drawString(fps, 10, 10);
 
 	Lamp::getScene().onGUI();
+	
 }

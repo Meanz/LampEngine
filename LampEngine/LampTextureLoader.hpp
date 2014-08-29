@@ -59,7 +59,7 @@ namespace LampProject
 				//Temp way of doing it :p
 				glEnable(GL_TEXTURE_2D);
 				glBindTexture(GL_TEXTURE_2D, texture->getGLId());
-				glTexImage2D(GL_TEXTURE_2D, 0, texture->m_Format, texture->m_Width, texture->m_Height, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
+				glTexImage2D(GL_TEXTURE_2D, 0, texture->m_Format, texture->m_Width, texture->m_Height, 0, texture->m_Format, GL_UNSIGNED_BYTE, surface->pixels);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 

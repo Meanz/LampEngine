@@ -16,38 +16,8 @@
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{f9a72f56-393a-43be-b90b-a235330940f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\std">
-      <UniqueIdentifier>{52b71469-9655-4ed8-bf47-52dcb24312b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\std">
-      <UniqueIdentifier>{354b2de4-7919-4aee-af84-8f1163b5c08a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{ffc8d885-5ba3-48a5-ad13-ba0e644e0c2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Asset">
-      <UniqueIdentifier>{d698adb7-bdd6-4574-8c08-a03f8969971f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Asset">
-      <UniqueIdentifier>{19798b4f-0bfb-4cf6-84c5-8092c5a8ca94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Material">
-      <UniqueIdentifier>{caffe53a-8ca7-4943-b653-1b5042ea2306}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Material">
-      <UniqueIdentifier>{854ba767-d2bf-4461-bfa1-f2e315a7d82e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Scene">
-      <UniqueIdentifier>{cbe69192-db30-4844-9ef7-580d05099763}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Scene">
-      <UniqueIdentifier>{4355916a-e5b3-4713-b853-516f66c7682e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Input">
-      <UniqueIdentifier>{ab7eece4-7c2e-4a00-bb94-c05fdf866574}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Input">
-      <UniqueIdentifier>{b2c4d897-2061-4ec9-935e-247139c82bd8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Util">
       <UniqueIdentifier>{21ad3daa-39ca-4ab6-be89-745025186b22}</UniqueIdentifier>
@@ -61,12 +31,6 @@
     <Filter Include="Source Files\Lua">
       <UniqueIdentifier>{930cfa14-aeb6-4ee0-b8b7-7d723075b77f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GUI">
-      <UniqueIdentifier>{58df607b-883d-42f8-8348-7f7bdf18d1a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GUI">
-      <UniqueIdentifier>{dcd04f81-7934-44ff-9d05-397f938af9d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{070d137f-7092-4cc5-bb18-32d3b853db37}</UniqueIdentifier>
     </Filter>
@@ -79,16 +43,52 @@
     <Filter Include="Source Files\Game\Actor">
       <UniqueIdentifier>{532ed746-4fd9-4524-864c-25e156c49c77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Mesh">
-      <UniqueIdentifier>{f2649eef-c5e5-4522-8893-f4b6a7d337ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Render">
       <UniqueIdentifier>{39f14b5e-db53-45d5-9b56-27053e462fee}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Core\Render">
       <UniqueIdentifier>{da2f8f41-cacd-434b-8af8-9bd1bd066a6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Mesh">
+    <Filter Include="Source Files\Game\Scene">
+      <UniqueIdentifier>{4355916a-e5b3-4713-b853-516f66c7682e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Scene">
+      <UniqueIdentifier>{cbe69192-db30-4844-9ef7-580d05099763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Util\std">
+      <UniqueIdentifier>{52b71469-9655-4ed8-bf47-52dcb24312b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util\std">
+      <UniqueIdentifier>{354b2de4-7919-4aee-af84-8f1163b5c08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Material">
+      <UniqueIdentifier>{854ba767-d2bf-4461-bfa1-f2e315a7d82e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Material">
+      <UniqueIdentifier>{caffe53a-8ca7-4943-b653-1b5042ea2306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Asset">
+      <UniqueIdentifier>{d698adb7-bdd6-4574-8c08-a03f8969971f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Asset">
+      <UniqueIdentifier>{19798b4f-0bfb-4cf6-84c5-8092c5a8ca94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GUI">
+      <UniqueIdentifier>{dcd04f81-7934-44ff-9d05-397f938af9d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\GUI">
+      <UniqueIdentifier>{58df607b-883d-42f8-8348-7f7bdf18d1a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Input">
+      <UniqueIdentifier>{ab7eece4-7c2e-4a00-bb94-c05fdf866574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Input">
+      <UniqueIdentifier>{b2c4d897-2061-4ec9-935e-247139c82bd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Mesh">
+      <UniqueIdentifier>{f2649eef-c5e5-4522-8893-f4b6a7d337ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Mesh">
       <UniqueIdentifier>{43e0f8a3-cac8-440d-983b-5f88769f2f0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -106,22 +106,22 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Header Files\std</Filter>
+      <Filter>Header Files\Util\std</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>Header Files\std</Filter>
+      <Filter>Header Files\Util\std</Filter>
     </ClInclude>
     <ClInclude Include="LampTexture.hpp">
-      <Filter>Header Files\Material</Filter>
+      <Filter>Header Files\Core\Material</Filter>
     </ClInclude>
     <ClInclude Include="LampAssetManager.hpp">
-      <Filter>Header Files\Asset</Filter>
+      <Filter>Header Files\Core\Asset</Filter>
     </ClInclude>
     <ClInclude Include="LampPrefix.hpp">
-      <Filter>Header Files\std</Filter>
+      <Filter>Header Files\Util\std</Filter>
     </ClInclude>
     <ClInclude Include="LampTextureLoader.hpp">
-      <Filter>Header Files\Asset</Filter>
+      <Filter>Header Files\Core\Asset</Filter>
     </ClInclude>
     <ClInclude Include="LampWindow.hpp">
       <Filter>Header Files\Core</Filter>
@@ -130,31 +130,31 @@
       <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
     <ClInclude Include="LampTypes.hpp">
-      <Filter>Header Files\std</Filter>
+      <Filter>Header Files\Util\std</Filter>
     </ClInclude>
     <ClInclude Include="LampCamera.hpp">
-      <Filter>Header Files\Scene</Filter>
+      <Filter>Header Files\Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="LampTransform.hpp">
-      <Filter>Header Files\Scene</Filter>
+      <Filter>Header Files\Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="LampScene.hpp">
-      <Filter>Header Files\Scene</Filter>
+      <Filter>Header Files\Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="LampGameObject.hpp">
-      <Filter>Header Files\Scene</Filter>
+      <Filter>Header Files\Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="LampInput.hpp">
-      <Filter>Header Files\Input</Filter>
+      <Filter>Header Files\Core\Input</Filter>
     </ClInclude>
     <ClInclude Include="LampShader.hpp">
-      <Filter>Header Files\Material</Filter>
+      <Filter>Header Files\Core\Material</Filter>
     </ClInclude>
     <ClInclude Include="LampUtil.hpp">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="LampShaderParser.hpp">
-      <Filter>Header Files\Asset</Filter>
+      <Filter>Header Files\Core\Asset</Filter>
     </ClInclude>
     <ClInclude Include="LampLua.hpp">
       <Filter>Header Files\Lua</Filter>
@@ -163,25 +163,25 @@
       <Filter>Header Files\Lua</Filter>
     </ClInclude>
     <ClInclude Include="LampMaterial.hpp">
-      <Filter>Header Files\Material</Filter>
+      <Filter>Header Files\Core\Material</Filter>
     </ClInclude>
     <ClInclude Include="LampMaterialParser.hpp">
-      <Filter>Header Files\Asset</Filter>
+      <Filter>Header Files\Core\Asset</Filter>
     </ClInclude>
     <ClInclude Include="LampScriptComponent.hpp">
-      <Filter>Header Files\Scene</Filter>
+      <Filter>Header Files\Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="LampComponent.hpp">
-      <Filter>Header Files\GUI</Filter>
+      <Filter>Header Files\Core\GUI</Filter>
     </ClInclude>
     <ClInclude Include="LampGUI.hpp">
-      <Filter>Header Files\GUI</Filter>
+      <Filter>Header Files\Core\GUI</Filter>
     </ClInclude>
     <ClInclude Include="LampGUIPainter.hpp">
-      <Filter>Header Files\GUI</Filter>
+      <Filter>Header Files\Core\GUI</Filter>
     </ClInclude>
     <ClInclude Include="LampGUIComponents.hpp">
-      <Filter>Header Files\GUI</Filter>
+      <Filter>Header Files\Core\GUI</Filter>
     </ClInclude>
     <ClInclude Include="LampFontRenderer.hpp">
       <Filter>Header Files\Core\Render</Filter>
@@ -190,19 +190,19 @@
       <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
     <ClInclude Include="LampModelLoader.hpp">
-      <Filter>Header Files\Asset</Filter>
+      <Filter>Header Files\Core\Asset</Filter>
     </ClInclude>
     <ClInclude Include="LampActor.hpp">
       <Filter>Header Files\Game\Actor</Filter>
     </ClInclude>
     <ClInclude Include="LampMesh.hpp">
-      <Filter>Header Files\Mesh</Filter>
+      <Filter>Header Files\Core\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="LampModel.hpp">
-      <Filter>Header Files\Mesh</Filter>
+      <Filter>Header Files\Core\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="LampMWMLoader.hpp">
-      <Filter>Header Files\Mesh</Filter>
+      <Filter>Header Files\Core\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="LampMeshRenderer.hpp">
       <Filter>Header Files\Core\Render</Filter>
@@ -213,7 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files\std</Filter>
+      <Filter>Source Files\Util\std</Filter>
     </ClCompile>
     <ClCompile Include="SDLWrapper.cpp">
       <Filter>Source Files\Core</Filter>
@@ -225,78 +225,78 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="LampTexture.cpp">
-      <Filter>Source Files\Material</Filter>
+      <Filter>Source Files\Core\Material</Filter>
     </ClCompile>
     <ClCompile Include="LampAssetManager.cpp">
-      <Filter>Source Files\Asset</Filter>
+      <Filter>Source Files\Core\Asset</Filter>
     </ClCompile>
     <ClCompile Include="LampRenderer.cpp">
       <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
     <ClCompile Include="LampScene.cpp">
-      <Filter>Source Files\Scene</Filter>
+      <Filter>Source Files\Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="LampGameObject.cpp">
-      <Filter>Source Files\Scene</Filter>
+      <Filter>Source Files\Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="LampCamera.cpp">
-      <Filter>Source Files\Scene</Filter>
+      <Filter>Source Files\Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="LampInput.cpp">
-      <Filter>Source Files\Input</Filter>
+      <Filter>Source Files\Core\Input</Filter>
     </ClCompile>
     <ClCompile Include="LampShader.cpp">
-      <Filter>Source Files\Material</Filter>
+      <Filter>Source Files\Core\Material</Filter>
     </ClCompile>
     <ClCompile Include="LampUtil.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="LampShaderParser.cpp">
-      <Filter>Source Files\Asset</Filter>
+      <Filter>Source Files\Core\Asset</Filter>
     </ClCompile>
     <ClCompile Include="LampMaterial.cpp">
-      <Filter>Source Files\Material</Filter>
+      <Filter>Source Files\Core\Material</Filter>
     </ClCompile>
     <ClCompile Include="LampLua.cpp">
       <Filter>Source Files\Lua</Filter>
     </ClCompile>
     <ClCompile Include="LampScriptComponent.cpp">
-      <Filter>Source Files\Scene</Filter>
+      <Filter>Source Files\Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="LampComponent.cpp">
-      <Filter>Source Files\GUI</Filter>
+      <Filter>Source Files\Core\GUI</Filter>
     </ClCompile>
     <ClCompile Include="LampGUI.cpp">
-      <Filter>Source Files\GUI</Filter>
+      <Filter>Source Files\Core\GUI</Filter>
     </ClCompile>
     <ClCompile Include="LampGUIPainter.cpp">
-      <Filter>Source Files\GUI</Filter>
+      <Filter>Source Files\Core\GUI</Filter>
     </ClCompile>
     <ClCompile Include="LampFontRenderer.cpp">
       <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
     <ClCompile Include="LampTypes.cpp">
-      <Filter>Source Files\std</Filter>
+      <Filter>Source Files\Util\std</Filter>
     </ClCompile>
     <ClCompile Include="LampModelLoader.cpp">
-      <Filter>Source Files\Asset</Filter>
+      <Filter>Source Files\Core\Asset</Filter>
     </ClCompile>
     <ClCompile Include="LampActor.cpp">
       <Filter>Source Files\Game\Actor</Filter>
     </ClCompile>
     <ClCompile Include="LampMesh.cpp">
-      <Filter>Source Files\Mesh</Filter>
+      <Filter>Source Files\Core\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="LampMWMLoader.cpp">
-      <Filter>Source Files\Mesh</Filter>
+      <Filter>Source Files\Core\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="LampSkeleton.cpp">
-      <Filter>Source Files\Mesh</Filter>
+      <Filter>Source Files\Core\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LampSkeleton.hpp">
-      <Filter>Header Files\Mesh</Filter>
+      <Filter>Header Files\Core\Mesh</Filter>
     </None>
   </ItemGroup>
 </Project>
