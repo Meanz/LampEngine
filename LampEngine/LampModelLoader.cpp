@@ -3,6 +3,7 @@
 #include "LampMWMLoader.hpp"
 #include "LampMeshRenderer.hpp"
 #include "LampSkeletalMeshRenderer.hpp"
+#include "LampOBJLoader.hpp"
 #include <rapidxml.hpp>
 
 using namespace rapidxml;
@@ -64,75 +65,105 @@ LampGameObject* LampModelLoader::loadModel(string modelPath)
 			//Search for each object type and then process it
 			//This way we can attach the skeleton and meshes and everything in the order we want to.
 			//Make's life a whole lot easier you know.
-			xml_node<>* meshNode = modelNode->first_node("mesh");
-			xml_node<>* textureNode = modelNode->first_node("texture");
-			xml_node<>* skeletonNode = modelNode->first_node("skeleton");
 
-			LampMesh* pMesh = NULL;
-			LampTexture* pTexture = NULL;
-			LampSkeleton* pSkeleton = NULL;
-
-			if (meshNode != NULL)
-			{
-				char* nodeName = meshNode->name();
-				string nodeValue = basedir + meshNode->value();
-
-				//Load the mesh!
-				LampMWMLoader loader(nodeValue);
-				pMesh = loader.loadModel();
-			}
-
-			if (textureNode != NULL)
-			{
-				char* nodeName = textureNode->name();
-				string nodeValue = basedir + textureNode->value();
-
-				//Load the texture!
-				pTexture = Lamp::getAssetManager().loadTexture(nodeValue);
-
-				if (pMesh != NULL)
-				{
-					pMesh->getMaterial()->setTexture("diffuse", pTexture);
-				}
-			}
-
-			if (skeletonNode != NULL)
-			{
-				char* nodeName = textureNode->name();
-				string nodeValue = basedir + textureNode->value();
-			}
-
-			//Seing as we can have several animations associated with this model
-			//Let's just iterate!
-			xml_node<>* animation = modelNode->first_node("animation");
-			if (animation != NULL)
-			{
-				if (skeletonNode == NULL)
-				{
-					throw new std::runtime_error("Can not animate a mesh without a skeleton.");
-				}
-				while (animation != NULL)
-				{
-					animation = animation->next_sibling("animation");
-				}
-			}
 
 			//Create our game object here and return it!
 			LampGameObject* lgo = new LampGameObject();
 
-			//Do we have a skeletal mesh?
-			if (meshNode != NULL)
+
+			xml_node<>* meshNode = modelNode->first_node("mesh");
+			while (meshNode != NULL)
 			{
+				xml_node<>* textureNode = meshNode->first_node("texture");
+				xml_node<>* skeletonNode = meshNode->first_node("skeleton");
+
+				LampMesh* pMesh = NULL;
+				LampTexture* pTexture = NULL;
+				LampSkeleton* pSkeleton = NULL;
+
+				if (meshNode != NULL)
+				{
+					char* nodeName = meshNode->name();
+					xml_attribute<>* pPathAttrib = meshNode->first_attribute("path");
+					string nodeValue = basedir + (pPathAttrib == NULL ? "" : pPathAttrib->value());
+
+					//Load the mesh!
+
+					//Check if the type attribute is there!
+					xml_attribute<>* pTypeAttrib = meshNode->first_attribute("type");
+
+					if (pTypeAttrib == NULL || pTypeAttrib->value() == "lm")
+					{
+						LampMWMLoader loader(nodeValue);
+						pMesh = loader.loadModel();
+						
+					}
+					else if (strcmp(pTypeAttrib->value(), "obj") == 0)
+					{
+						LampOBJLoader loader(nodeValue);
+						pMesh = loader.loadMesh();
+					}
+					else
+					{
+						printf("WHAT\n");
+					}
+					if (pMesh != NULL)
+					{
+						pMesh->setMaterial(Lamp::getAssetManager().createMaterial());
+					}
+				}
+
+				if (textureNode != NULL)
+				{
+					char* nodeName = textureNode->name();
+					string nodeValue = basedir + textureNode->value();
+
+					//Load the texture!
+					pTexture = Lamp::getAssetManager().loadTexture(nodeValue);
+
+					if (pMesh != NULL)
+					{
+						pMesh->getMaterial()->setTexture("diffuse", pTexture);
+					}
+				}
+
 				if (skeletonNode != NULL)
 				{
-					lgo->addComponent(new LampSkeletalMeshRenderer(pMesh, pSkeleton));
+					char* nodeName = textureNode->name();
+					string nodeValue = basedir + textureNode->value();
 				}
-				else
+
+				//Seing as we can have several animations associated with this model
+				//Let's just iterate!
+				xml_node<>* animation = meshNode->first_node("animation");
+				if (animation != NULL)
 				{
-					//We don't have a skeletal mesh, so let's just give it an ordinary
-					//Mesh renderer
-					lgo->addComponent(new LampMeshRenderer(pMesh));
+					if (skeletonNode == NULL)
+					{
+						throw new std::runtime_error("Can not animate a mesh without a skeleton.");
+					}
+					while (animation != NULL)
+					{
+						animation = animation->next_sibling("animation");
+					}
 				}
+
+				//Do we have a skeletal mesh?
+				if (meshNode != NULL)
+				{
+					if (skeletonNode != NULL)
+					{
+						lgo->addComponent(new LampSkeletalMeshRenderer(pMesh, pSkeleton));
+					}
+					else
+					{
+						//We don't have a skeletal mesh, so let's just give it an ordinary
+						//Mesh renderer
+						lgo->addComponent(new LampMeshRenderer(pMesh));
+					}
+				}
+
+				meshNode = meshNode->next_sibling("mesh");
 			}
 
 			return lgo;

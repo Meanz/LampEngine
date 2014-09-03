@@ -29,10 +29,21 @@ LampAssetManager::~LampAssetManager()
 	}
 }
 
+LampMaterial* LampAssetManager::createMaterial()
+{
+	//Generate id for the texture
+	int id;
+	for (id = 0; getMaterial("mat_" + id) != NULL; id = m_matIdxCounter++);
+
+	return createMaterial("mat_" + id);
+}
+
 LampMaterial* LampAssetManager::createMaterial(std::string materialId)
 {
 	//collio!
-	return NULL;
+	LampMaterial* pMaterial = new LampMaterial();
+	m_mMaterials[materialId] = pMaterial;
+	return pMaterial;
 }
 
 LampMaterial* LampAssetManager::loadMaterial(std::string materialId, std::string materialPath)

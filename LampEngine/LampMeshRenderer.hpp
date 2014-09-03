@@ -18,6 +18,15 @@ namespace LampProject
 
 		void onFrame()
 		{
+			if (m_pMesh == NULL)
+			{
+				//Nothing to do
+				return;
+			}
+			if (!m_pMesh->isCompiled())
+			{
+				m_pMesh->compile();
+			}
 			m_pMesh->render();
 		}
 

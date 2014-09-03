@@ -219,6 +219,9 @@
     <ClInclude Include="LampMeshRenderer.hpp">
       <Filter>Header Files\Core\Mesh\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="LampOBJLoader.hpp">
+      <Filter>Header Files\Core\Asset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

@@ -96,6 +96,7 @@
     <ClInclude Include="LampModel.hpp" />
     <ClInclude Include="LampModelLoader.hpp" />
     <ClInclude Include="LampMWMLoader.hpp" />
+    <ClInclude Include="LampOBJLoader.hpp" />
     <ClInclude Include="LampPrefix.hpp" />
     <ClInclude Include="LampRenderer.hpp" />
     <ClInclude Include="LampScene.hpp" />

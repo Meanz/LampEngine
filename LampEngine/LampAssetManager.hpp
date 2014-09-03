@@ -14,6 +14,7 @@ namespace LampProject
 
 	private:
 		int m_texIdCounter;
+		int m_matIdxCounter;
 
 		std::map<std::string, LampTexture*> m_mTextures;
 		std::map<std::string, LampShaderProgram*> m_mShaderPrograms;
@@ -25,6 +26,7 @@ namespace LampProject
 		~LampAssetManager();
 
 		//Create a material
+		LampMaterial* createMaterial();
 		LampMaterial* createMaterial(std::string materialId);
 
 		//Load the given material
