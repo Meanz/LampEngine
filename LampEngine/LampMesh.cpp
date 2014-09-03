@@ -44,6 +44,11 @@ LampMeshData* LampMesh::getMeshData()
 	return (&m_meshData);
 }
 
+bool LampMesh::isCompiled()
+{
+	return m_isCompiled;
+}
+
 void LampMesh::compile()
 {
 

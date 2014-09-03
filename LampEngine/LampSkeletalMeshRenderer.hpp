@@ -5,7 +5,7 @@
 
 namespace LampProject
 {
-	class LampMeshRenderer : public LampNodeComponent
+	class LampSkeletalMeshRenderer : public LampNodeComponent
 	{
 
 	private:
@@ -13,13 +13,22 @@ namespace LampProject
 		LampSkeleton* m_pSkeleton;
 
 	public:
-		LampMeshRenderer(LampMesh* pMesh, LampSkeleton* pSkeleton) : m_pMesh(pMesh), m_pSkeleton(pSkeleton)
+		LampSkeletalMeshRenderer(LampMesh* pMesh, LampSkeleton* pSkeleton) : m_pMesh(pMesh), m_pSkeleton(pSkeleton)
+		{
+			
+		}
+
+		~LampSkeletalMeshRenderer()
 		{
 
 		}
 
 		void onFrame()
 		{
+			if (!m_pMesh->isCompiled())
+			{
+				m_pMesh->compile();
+			}
 			m_pMesh->render();
 		}
 

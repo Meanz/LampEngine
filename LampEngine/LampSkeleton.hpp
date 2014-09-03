@@ -8,9 +8,13 @@ namespace LampProject
 	struct LampBone
 	{
 		GLuint boneId;
+		GLuint parentId;
 		string boneName;
 		mat4 identityMatrix;
 		mat4 offsetMatrix;
+
+		//This is instance information, should it be here?
+		mat4 globalTransform;
 	};
 
 	class LampSkeleton
@@ -24,24 +28,19 @@ namespace LampProject
 
 	public:
 
-		LampSkeleton();
-		~LampSkeleton();
+		LampSkeleton()
+		{
 
-	};
+		}
+		~LampSkeleton()
+		{
 
+		}
 
-	struct LampTrack
-	{
-
-	};
-
-	class LampAnimation
-	{
-
-	private:
-	public:
-
-		string getName();
+		void setBones(vector<LampBone> vBoneList)
+		{
+			m_vBoneList = vBoneList;
+		}
 
 	};
 

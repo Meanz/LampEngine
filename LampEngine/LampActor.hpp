@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
-#include "LampSkeleton.hpp"
+#include "LampAnimation.hpp"
 
 namespace LampProject
 {

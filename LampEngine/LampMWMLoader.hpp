@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-
+#include "LampAnimation.hpp"
 
 namespace LampProject
 {
@@ -42,8 +42,8 @@ namespace LampProject
 		LampMesh* loadModel();
 
 		void loadMesh();
-		void loadSkeleton();
-		void loadAnimation();
+		LampSkeleton* loadSkeleton();
+		LampAnimation* loadAnimation();
 
 
 

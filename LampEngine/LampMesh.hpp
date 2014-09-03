@@ -100,6 +100,9 @@ namespace LampProject
 		//Mark this mesh as updated, this will compile the mesh the next time it's drawn
 		void markAsUpdated();
 
+		//Get whether this mesh is compiled or not
+		bool isCompiled();
+		
 		//Compiles this mesh
 		void compile();
 

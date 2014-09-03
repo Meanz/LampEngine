@@ -60,11 +60,6 @@ LampBinaryFileReadResult readBinaryFile(std::string filePath)
 
 	//
 	file.read(tempBuffer, length);
-
-	if (file)
-		printf("All okay!");
-	else
-		printf("It went bad :(");
 		
 	for (int i = 0; i < length; i++)
 	{

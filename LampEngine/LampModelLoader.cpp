@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "LampModelLoader.hpp"
+#include "LampMWMLoader.hpp"
+#include "LampMeshRenderer.hpp"
+#include "LampSkeletalMeshRenderer.hpp"
 #include <rapidxml.hpp>
 
 using namespace rapidxml;
@@ -43,7 +46,7 @@ LampGameObject* LampModelLoader::loadModel(string modelPath)
 		if (strcmp("model", doc.first_node()->name()) == 0)
 		{
 			//Initialize our game object!
-			
+
 			//Our current node!
 			xml_node<>* modelNode = doc.first_node();
 
@@ -57,64 +60,82 @@ LampGameObject* LampModelLoader::loadModel(string modelPath)
 				basedir = basedirAttrib->value();
 			}
 
-			//Now parse the child nodes of the model node!
-			xml_node<>* workingNode = modelNode->first_node();
-			while (workingNode != NULL)
+			//TODO: Instead of iterating over each object and then comparing it
+			//Search for each object type and then process it
+			//This way we can attach the skeleton and meshes and everything in the order we want to.
+			//Make's life a whole lot easier you know.
+			xml_node<>* meshNode = modelNode->first_node("mesh");
+			xml_node<>* textureNode = modelNode->first_node("texture");
+			xml_node<>* skeletonNode = modelNode->first_node("skeleton");
+
+			LampMesh* pMesh = NULL;
+			LampTexture* pTexture = NULL;
+			LampSkeleton* pSkeleton = NULL;
+
+			if (meshNode != NULL)
 			{
-				//Get the name of this node!
-				char* nodeName = workingNode->name();
-				string nodeValue = basedir + workingNode->value();
+				char* nodeName = meshNode->name();
+				string nodeValue = basedir + meshNode->value();
 
-				if (strcmp("mesh", nodeName) == 0)
+				//Load the mesh!
+				LampMWMLoader loader(nodeValue);
+				pMesh = loader.loadModel();
+			}
+
+			if (textureNode != NULL)
+			{
+				char* nodeName = textureNode->name();
+				string nodeValue = basedir + textureNode->value();
+
+				//Load the texture!
+				pTexture = Lamp::getAssetManager().loadTexture(nodeValue);
+
+				if (pMesh != NULL)
 				{
-					//Let's do some checking, does this model have a skeleton node?
-					bool hasSkeleton = false;
-					if (workingNode->next_sibling("skeleton") != NULL) hasSkeleton = true;
-
-					printf("MeshPath: %s\n", nodeValue.c_str());
-
-					if (hasSkeleton)
-					{
-						//We want to create a skeletal mesh!
-						//LampSkeletalMesh
-					}
-					else
-					{
-
-					}
+					pMesh->getMaterial()->setTexture("diffuse", pTexture);
 				}
-				else if (strcmp("texture", nodeName) == 0)
-				{
-					//We can also get texture by id!
-					//<texture>id:engine_texture0</texture>
-					
-					//First test the length of the str
-					if (nodeValue.length() >= 3)
-					{
-						if (strcmp("id:", nodeValue.substr(0, 3).c_str()) == 0)
-						{
-							//We have an id node!
-						}
-					}
-					
-					//Do full load!
-					
-				}
-				else if (strcmp("skeleton", nodeName) == 0)
-				{
+			}
 
-				}
-				else if (strcmp("animation", nodeName) == 0)
+			if (skeletonNode != NULL)
+			{
+				char* nodeName = textureNode->name();
+				string nodeValue = basedir + textureNode->value();
+			}
+
+			//Seing as we can have several animations associated with this model
+			//Let's just iterate!
+			xml_node<>* animation = modelNode->first_node("animation");
+			if (animation != NULL)
+			{
+				if (skeletonNode == NULL)
 				{
+					throw new std::runtime_error("Can not animate a mesh without a skeleton.");
+				}
+				while (animation != NULL)
+				{
+					animation = animation->next_sibling("animation");
+				}
+			}
+
+			//Create our game object here and return it!
+			LampGameObject* lgo = new LampGameObject();
+
+			//Do we have a skeletal mesh?
+			if (meshNode != NULL)
+			{
+				if (skeletonNode != NULL)
+				{
+					lgo->addComponent(new LampSkeletalMeshRenderer(pMesh, pSkeleton));
 				}
 				else
 				{
-					printf("Uhandled node type in model. Type: %s\n", nodeName);
+					//We don't have a skeletal mesh, so let's just give it an ordinary
+					//Mesh renderer
+					lgo->addComponent(new LampMeshRenderer(pMesh));
 				}
-
-				//Next
-				workingNode = workingNode->next_sibling();
 			}
+
+			return lgo;
 		}
 		else
 		{
@@ -122,7 +143,6 @@ LampGameObject* LampModelLoader::loadModel(string modelPath)
 			printf("First node does not match \"model\"\n");
 			return NULL;
 		}
-
 	}
 	else
 	{

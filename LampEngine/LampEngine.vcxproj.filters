@@ -91,6 +91,12 @@
     <Filter Include="Source Files\Core\Mesh">
       <UniqueIdentifier>{43e0f8a3-cac8-440d-983b-5f88769f2f0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Mesh\Animation">
+      <UniqueIdentifier>{c960aa62-f614-46b0-b558-9f6e259dce77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Mesh\Renderer">
+      <UniqueIdentifier>{87d7486e-2801-44be-9f5e-accb0857e282}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lamp.hpp">
@@ -202,13 +208,16 @@
       <Filter>Header Files\Core\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="LampMWMLoader.hpp">
-      <Filter>Header Files\Core\Mesh</Filter>
+      <Filter>Header Files\Core\Asset</Filter>
     </ClInclude>
-    <ClInclude Include="LampMeshRenderer.hpp">
-      <Filter>Header Files\Core\Render</Filter>
+    <ClInclude Include="LampAnimation.hpp">
+      <Filter>Header Files\Core\Mesh\Animation</Filter>
     </ClInclude>
     <ClInclude Include="LampSkeletalMeshRenderer.hpp">
-      <Filter>Header Files\Core\Render</Filter>
+      <Filter>Header Files\Core\Mesh\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="LampMeshRenderer.hpp">
+      <Filter>Header Files\Core\Mesh\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,16 +296,16 @@
     <ClCompile Include="LampMesh.cpp">
       <Filter>Source Files\Core\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="LampMWMLoader.cpp">
-      <Filter>Source Files\Core\Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="LampSkeleton.cpp">
       <Filter>Source Files\Core\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="LampMWMLoader.cpp">
+      <Filter>Source Files\Core\Asset</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LampSkeleton.hpp">
-      <Filter>Header Files\Core\Mesh</Filter>
+      <Filter>Header Files\Core\Mesh\Animation</Filter>
     </None>
   </ItemGroup>
 </Project>

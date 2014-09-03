@@ -84,7 +84,7 @@ LampAnimation* LampActor::getAnimation(string animationName)
 		if (m_vAnimations[i] == NULL)
 			throw new std::runtime_error("[LampActor::getAnimation] Animation in list can't be null.");
 
-		if (m_vAnimations[i]->getName() == animationName)
+		if (m_vAnimations[i]->name == animationName)
 		{
 			return m_vAnimations[i];
 		}
