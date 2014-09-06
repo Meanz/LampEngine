@@ -327,10 +327,10 @@ void LampShaderProgram::updateUniforms(LampRenderer& renderer, LampMaterial* pMa
 			}
 			else if (uniformName == "R_Bones")
 			{
-				vector<mat4*>& skinningMatrices = pMaterial->getMatrix4Array(uniformName);
+				vector<mat4>& skinningMatrices = pMaterial->getMatrix4Array(uniformName);
 				if (skinningMatrices.size() > 0)
 				{
-					glUniformMatrix4fv(uniformLocation, skinningMatrices.size(), GL_FALSE, glm::value_ptr(*skinningMatrices[0]));
+					glUniformMatrix4fv(uniformLocation, skinningMatrices.size(), GL_FALSE, glm::value_ptr(skinningMatrices[0]));
 				}	
 			}
 		}

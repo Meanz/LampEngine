@@ -46,7 +46,7 @@ void LampMaterial::setMatrix3(string key, mat3 m)
 	m_valueMap.m_mat3Map[key] = m;
 }
 
-void LampMaterial::setMatrix4Array(string key, vector<mat4*>& m)
+void LampMaterial::setMatrix4Array(string key, vector<mat4>& m)
 {
 	m_valueMap.m_mat4ArrayMap[key] = m;
 }
@@ -123,16 +123,16 @@ mat4 LampMaterial::getMatrix4(string key)
 	}
 }
 
-vector<mat4*>& LampMaterial::getMatrix4Array(string key)
+vector<mat4>& LampMaterial::getMatrix4Array(string key)
 {
-	map<string, vector<mat4*>>::iterator iter = m_valueMap.m_mat4ArrayMap.find(key);
+	map<string, vector<mat4>>::iterator iter = m_valueMap.m_mat4ArrayMap.find(key);
 	if (iter != m_valueMap.m_mat4ArrayMap.end())
 	{
 		return iter->second;
 	}
 	else
 	{
-		vector<mat4*> nullVec;
+		vector<mat4> nullVec;
 		return nullVec; //Return NULL
 	}
 }

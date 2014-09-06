@@ -31,6 +31,7 @@ namespace LampProject {
 		bool m_isRunning;
 		int m_FPS;
 		int m_UPS;
+		float m_FrameTime;
 
 		//The core loop
 		void loop();
@@ -72,6 +73,7 @@ namespace LampProject {
 			return m_pAssetManager;
 		}
 
+		float getFrameTime();
 		int getFPS();
 		int getUPS();
 

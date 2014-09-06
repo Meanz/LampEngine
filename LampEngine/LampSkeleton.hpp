@@ -35,14 +35,16 @@ namespace LampProject
 	
 	private:
 
-		vector<LampBone> m_vBoneList;
-		vector<LampBone> m_vTopBones;
-		vector<mat4> m_vBoneTransforms;
+		//Indexed list of bones
+		vector<LampBone*> m_vBoneList;
+		//The list of top bones for hierarchical traversing
+		vector<LampBone*> m_vTopBones;
 
 	public:
 
 		LampSkeleton()
 		{
+			//Calculate inverse bind matrices!
 
 		}
 		~LampSkeleton()
@@ -68,34 +70,45 @@ namespace LampProject
 
 		void calcGlobalTransform()
 		{
-			vector<LampBone>& bones = m_vTopBones;
+			vector<LampBone*>& bones = m_vTopBones;
 			for (unsigned int i = 0; i < bones.size(); i++)
 			{
-				recurCalcGlobalTransform(bones[i]);
+				recurCalcGlobalTransform(*bones[i]);
 			}
 		}
 
-		vector<LampBone>& getTopBones()
+		vector<LampBone*>& getTopBones()
 		{
 			return m_vTopBones;
 		}
 
-		vector<LampBone>& getBones()
+		vector<LampBone*>& getBones()
 		{
 			return m_vBoneList;
 		}
 
-		void setBones(vector<LampBone> vBoneList)
+		void setBones(vector<LampBone*>& vBoneList)
 		{
 			m_vBoneList = vBoneList;
 
 			//Find top bones!
 			for (unsigned int i = 0; i < vBoneList.size(); i++)
 			{
-				if (vBoneList[i].pParent == NULL)
+				if (vBoneList[i]->pParent == NULL)
 				{
 					m_vTopBones.push_back(vBoneList[i]);
 				}
+			}
+
+			//Calculate initial transforms
+			calcGlobalTransform();
+
+			//Calculate the inverse transforms
+			for (unsigned int i = 0; i < m_vBoneList.size(); i++)
+			{
+				LampBone& bone = *m_vBoneList[i];
+
+				bone.invBindMatrix = glm::inverse(bone.globalTransform);
 			}
 		}
 

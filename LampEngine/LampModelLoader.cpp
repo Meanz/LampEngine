@@ -114,7 +114,7 @@ LampGameObject* LampModelLoader::loadModel(string modelPath)
 						if (skeletonNode != NULL)
 						{
 							pMesh->getMaterial()->setShader(Lamp::getAssetManager().getShaderProgram("skinned"));
-							pMesh->setCompileMode(LampMeshCompileMode::COMPILE_LEGACY);
+							//pMesh->setCompileMode(LampMeshCompileMode::COMPILE_LEGACY);
 						}
 						else
 						{

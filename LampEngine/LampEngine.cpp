@@ -55,6 +55,11 @@ LampEngine::~LampEngine()
 	Lamp::onEngineQuit();
 }
 
+float LampEngine::getFrameTime()
+{
+	return m_FrameTime;
+}
+
 int LampEngine::getFPS()
 {
 	return m_FPS;
@@ -109,7 +114,7 @@ void LampEngine::loop()
 	//SDL_StartTextInput();
 
 	const int TICKS_PER_SECOND = m_config.targetUpdatesPerSecond;
-	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND; //Reverse
 	const int MAX_FRAME_SKIP = 100;
 
 	DWORD64 nextTick = GetTickCount64();
@@ -117,6 +122,8 @@ void LampEngine::loop()
 
 	int tempFPS = 0;
 	int tempUPS = 0;
+
+	DWORD64 lastFrame = GetTickCount64();
 
 	//While application is running
 	int loops;
@@ -150,6 +157,10 @@ void LampEngine::loop()
 			//Game has frozen? 
 			//Tell someone about this.
 		}
+
+		//What is the time since last frame?
+		m_FrameTime = GetTickCount64() - lastFrame;
+		lastFrame = GetTickCount64();
 
 		//Poll input
 		m_pInput->pollInput();

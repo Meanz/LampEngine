@@ -126,6 +126,10 @@ float LampBinaryBuffer::getFloat()
 	// Calculate the result:
 
 	float f = (float)(sign * mantissa * pow(2, exponent - 150));
+
+	if (f < FLT_EPSILON)
+		return 0.0f;
+
 	return f;
 }
 

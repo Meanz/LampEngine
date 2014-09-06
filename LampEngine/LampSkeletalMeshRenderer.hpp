@@ -28,7 +28,9 @@ namespace LampProject
 		{
 			for (unsigned int i = 0; i < m_pSkeleton->getBones().size(); i++)
 			{
-				m_vSkinningMatrices[i] = m_pSkeleton->getBones()[i].invBindMatrix * m_pSkeleton->getBones()[i].globalTransform;
+				mat4& invBindMatrix = m_pSkeleton->getBones()[i]->invBindMatrix;
+				mat4& globalTransform = m_pSkeleton->getBones()[i]->globalTransform;
+				m_vSkinningMatrices[i] = invBindMatrix * globalTransform;
 			}
 		}
 
@@ -54,12 +56,7 @@ namespace LampProject
 			//Send the matrices to the shader
 
 			//Until we figure out something more clever
-			vector<mat4*> vpSkinningMatrices(m_vSkinningMatrices.size());
-			for (unsigned int i = 0; i < vpSkinningMatrices.size(); i++)
-			{
-				vpSkinningMatrices[i] = &m_vSkinningMatrices[i];
-			}
-			m_pMesh->getMaterial()->setMatrix4Array("R_Bones", vpSkinningMatrices);
+			m_pMesh->getMaterial()->setMatrix4Array("R_Bones", m_vSkinningMatrices);
 
 
 			m_pMesh->render();

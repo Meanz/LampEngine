@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClInclude Include="LampActor.hpp" />
     <ClInclude Include="LampAnimation.hpp" />
+    <ClInclude Include="LampAnimator.hpp" />
     <ClInclude Include="LampFont.hpp" />
     <ClInclude Include="LampFontRenderer.hpp" />
     <ClInclude Include="LampGUIComponents.hpp" />

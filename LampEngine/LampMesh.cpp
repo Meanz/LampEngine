@@ -236,7 +236,7 @@ void LampMesh::render()
 					if (m_meshData.boneAssignments > 0)
 					{
 						//Get the skinning matrices
-						vector<mat4*>& skinningMatrices = m_material->getMatrix4Array("R_Bones");
+						vector<mat4>& skinningMatrices = m_material->getMatrix4Array("R_Bones");
 
 						mat4 boneTransform(1.0f);
 						for (int j = 0; j < 4; j++)
@@ -245,7 +245,7 @@ void LampMesh::render()
 								continue;
 
 							//We need to obtain the skinned matrices somehow :o!?
-							boneTransform += *skinningMatrices[m_meshData.boneAssignments[(index * 4) + j]] * m_meshData.weights[(index * 4) + j];
+							boneTransform += skinningMatrices[m_meshData.boneAssignments[(index * 4) + j]] * m_meshData.weights[(index * 4) + j];
 						}
 						vec4 skinnedPosition = boneTransform * vec4(m_meshData.positions[index].x, m_meshData.positions[index].y, m_meshData.positions[index].z, 1.0f);
 

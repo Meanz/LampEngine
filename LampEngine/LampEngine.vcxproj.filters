@@ -225,6 +225,9 @@
     <ClInclude Include="LampHelpers.hpp">
       <Filter>Header Files\Util\std</Filter>
     </ClInclude>
+    <ClInclude Include="LampAnimator.hpp">
+      <Filter>Source Files\Core\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

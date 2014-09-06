@@ -53,9 +53,7 @@ LampMesh* LampMWMLoader::loadModel()
 	std::string meshName = m_buffer->getString();
 
 	printf("Mesh: %s ... Version: %i\n", meshName.c_str(), version);
-
 	short numVertices = m_buffer->getShort();
-	printf("Num Vertices: %i\n", numVertices);
 	short numIndices = m_buffer->getShort();
 	bool hasNormals = m_buffer->getByte() == 1;
 	bool hasUVs = m_buffer->getByte() == 1;
@@ -220,8 +218,6 @@ LampSkeleton* LampMWMLoader::loadSkeleton()
 	int numBones = m_buffer->getShort();
 	vector<_bone> bones(numBones);
 
-	printf("NumBones: %i\n", numBones);
-
 	for (int i = 0; i < numBones; i++)
 	{
 		_bone bone;
@@ -246,7 +242,6 @@ LampSkeleton* LampMWMLoader::loadSkeleton()
 		if (bones[i].parentName == "")
 		{
 			topBones.push_back(bones[i]);
-			printf("TopBone: %s\n", bones[i].name.c_str());
 		}
 	}
 
@@ -310,28 +305,39 @@ LampSkeleton* LampMWMLoader::loadSkeleton()
 
 	//We have a sorted bone list... 
 	//Convert it into lamp bones
-	vector<LampBone> lbones;
+	vector<LampBone*> lbones;
 	for (unsigned int i = 0; i < finished.size(); i++)
 	{
-		LampBone b;
+		LampBone* b = new LampBone();
 		_bone& f = finished[i];
-		b.boneId = i;
-		b.parentId = -1;
+		b->boneId = i;
+		b->parentId = -1;
 		for (unsigned int j = 0; j < finished.size(); j++)
 		{
 			if (finished[j].name == finished[i].parentName)
 			{
-				b.parentId = j;
+				b->parentId = j;
 			}
 		}
-		b.boneName = f.name;
+		b->boneName = f.name;
 		//Create our matrix
 		mat4 positionMatrix = glm::translate(mat4(1.0f), f.pos) * glm::mat4_cast(glm::angleAxis(f.ang, f.rot)); //Ignore scaling :D
 
-		b.localTransform = positionMatrix;
+		b->localTransform = positionMatrix;
 
 		lbones.push_back(b);
 	}
+
+	//Second sorting step
+	for (unsigned int i = 0; i < lbones.size(); i++)
+	{
+		if (lbones[i]->parentId != -1)
+		{
+			lbones[i]->pParent = lbones[lbones[i]->parentId];
+		}
+	}
+
+	//Third sorting step, assign children to the lamp bones
 
 	pSkeleton->setBones(lbones);
 

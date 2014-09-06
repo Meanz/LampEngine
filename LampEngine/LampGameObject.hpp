@@ -10,7 +10,8 @@ namespace LampProject {
 	{
 		BASE = 0,
 		MESH_RENDERER = 1,
-		SCRIPT = 2
+		SCRIPT = 2,
+		ANIMATOR = 3
 	};
 
 	class LampNodeComponent
