@@ -82,6 +82,7 @@
     <ClInclude Include="LampGUIPainter.hpp" />
     <ClInclude Include="LampComponent.hpp" />
     <ClInclude Include="LampGUI.hpp" />
+    <ClInclude Include="LampHelpers.hpp" />
     <ClInclude Include="LampMaterial.hpp" />
     <ClInclude Include="LampAssetManager.hpp" />
     <ClInclude Include="Lamp.hpp" />

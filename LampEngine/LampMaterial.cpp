@@ -11,54 +11,69 @@ LampMaterial::~LampMaterial()
 
 }
 
-void LampMaterial::setFloat(std::string key, float f)
+LampShaderProgram* LampMaterial::getShader()
+{
+	return m_pShader;
+}
+
+void LampMaterial::setShader(LampShaderProgram* pShader)
+{
+	m_pShader = pShader;
+}
+
+void LampMaterial::setFloat(string key, float f)
 {
 	m_valueMap.m_floatMap[key] = f;
 }
 
-void LampMaterial::setInt(std::string key, int i)
+void LampMaterial::setInt(string key, int i)
 {
 	m_valueMap.m_intMap[key] = i;
 }
 
-void LampMaterial::setBool(std::string key, bool b)
+void LampMaterial::setBool(string key, bool b)
 {
 	m_valueMap.m_boolMap[key] = b;
 }
 
-void LampMaterial::setMatrix4(std::string key, mat4 m)
+void LampMaterial::setMatrix4(string key, mat4 m)
 {
 	m_valueMap.m_mat4Map[key] = m;
 }
 
-void LampMaterial::setMatrix3(std::string key, mat3 m)
+void LampMaterial::setMatrix3(string key, mat3 m)
 {
 	m_valueMap.m_mat3Map[key] = m;
 }
 
-void LampMaterial::setVec2(std::string key, vec2 v)
+void LampMaterial::setMatrix4Array(string key, vector<mat4*>& m)
+{
+	m_valueMap.m_mat4ArrayMap[key] = m;
+}
+
+void LampMaterial::setVec2(string key, vec2 v)
 {
 	m_valueMap.m_vec2Map[key] = v;
 }
 
-void LampMaterial::setVec3(std::string key, vec3 v)
+void LampMaterial::setVec3(string key, vec3 v)
 {
 	m_valueMap.m_vec3Map[key] = v;
 }
 
-void LampMaterial::setVec4(std::string key, vec4 v)
+void LampMaterial::setVec4(string key, vec4 v)
 {
 	m_valueMap.m_vec4Map[key] = v;
 }
 
-void LampMaterial::setTexture(std::string key, LampTexture* pTexture)
+void LampMaterial::setTexture(string key, LampTexture* pTexture)
 {
 	m_valueMap.m_textures[key] = pTexture;
 }
 
-float LampMaterial::getFloat(std::string key)
+float LampMaterial::getFloat(string key)
 {
-	std::map<std::string, float>::iterator iter = m_valueMap.m_floatMap.find(key);
+	map<string, float>::iterator iter = m_valueMap.m_floatMap.find(key);
 	if (iter != m_valueMap.m_floatMap.end())
 	{
 		return iter->second;
@@ -69,9 +84,9 @@ float LampMaterial::getFloat(std::string key)
 	}
 }
 
-int LampMaterial::getInt(std::string key)
+int LampMaterial::getInt(string key)
 {
-	std::map<std::string, int>::iterator iter = m_valueMap.m_intMap.find(key);
+	map<string, int>::iterator iter = m_valueMap.m_intMap.find(key);
 	if (iter != m_valueMap.m_intMap.end())
 	{
 		return iter->second;
@@ -82,9 +97,9 @@ int LampMaterial::getInt(std::string key)
 	}
 }
 
-bool LampMaterial::getBool(std::string key)
+bool LampMaterial::getBool(string key)
 {
-	std::map<std::string, bool>::iterator iter = m_valueMap.m_boolMap.find(key);
+	map<string, bool>::iterator iter = m_valueMap.m_boolMap.find(key);
 	if (iter != m_valueMap.m_boolMap.end())
 	{
 		return iter->second;
@@ -95,9 +110,9 @@ bool LampMaterial::getBool(std::string key)
 	}
 }
 
-mat4 LampMaterial::getMatrix4(std::string key)
+mat4 LampMaterial::getMatrix4(string key)
 {
-	std::map<std::string, mat4>::iterator iter = m_valueMap.m_mat4Map.find(key);
+	map<string, mat4>::iterator iter = m_valueMap.m_mat4Map.find(key);
 	if (iter != m_valueMap.m_mat4Map.end())
 	{
 		return iter->second;
@@ -108,9 +123,23 @@ mat4 LampMaterial::getMatrix4(std::string key)
 	}
 }
 
-mat3 LampMaterial::getMatrix3(std::string key)
+vector<mat4*>& LampMaterial::getMatrix4Array(string key)
 {
-	std::map<std::string, mat3>::iterator iter = m_valueMap.m_mat3Map.find(key);
+	map<string, vector<mat4*>>::iterator iter = m_valueMap.m_mat4ArrayMap.find(key);
+	if (iter != m_valueMap.m_mat4ArrayMap.end())
+	{
+		return iter->second;
+	}
+	else
+	{
+		vector<mat4*> nullVec;
+		return nullVec; //Return NULL
+	}
+}
+
+mat3 LampMaterial::getMatrix3(string key)
+{
+	map<string, mat3>::iterator iter = m_valueMap.m_mat3Map.find(key);
 	if (iter != m_valueMap.m_mat3Map.end())
 	{
 		return iter->second;
@@ -121,9 +150,9 @@ mat3 LampMaterial::getMatrix3(std::string key)
 	}
 }
 
-vec2 LampMaterial::getVec2(std::string key)
+vec2 LampMaterial::getVec2(string key)
 {
-	std::map<std::string, vec2>::iterator iter = m_valueMap.m_vec2Map.find(key);
+	map<string, vec2>::iterator iter = m_valueMap.m_vec2Map.find(key);
 	if (iter != m_valueMap.m_vec2Map.end())
 	{
 		return iter->second;
@@ -134,9 +163,9 @@ vec2 LampMaterial::getVec2(std::string key)
 	}
 }
 
-vec3 LampMaterial::getVec3(std::string key)
+vec3 LampMaterial::getVec3(string key)
 {
-	std::map<std::string, vec3>::iterator iter = m_valueMap.m_vec3Map.find(key);
+	map<string, vec3>::iterator iter = m_valueMap.m_vec3Map.find(key);
 	if (iter != m_valueMap.m_vec3Map.end())
 	{
 		return iter->second;
@@ -147,9 +176,9 @@ vec3 LampMaterial::getVec3(std::string key)
 	}
 }
 
-vec4 LampMaterial::getVec4(std::string key)
+vec4 LampMaterial::getVec4(string key)
 {
-	std::map<std::string, vec4>::iterator iter = m_valueMap.m_vec4Map.find(key);
+	map<string, vec4>::iterator iter = m_valueMap.m_vec4Map.find(key);
 	if (iter != m_valueMap.m_vec4Map.end())
 	{
 		return iter->second;
@@ -160,9 +189,9 @@ vec4 LampMaterial::getVec4(std::string key)
 	}
 }
 
-LampTexture* LampMaterial::getTexture(std::string key)
+LampTexture* LampMaterial::getTexture(string key)
 {
-	std::map<std::string, LampTexture*>::iterator iter = m_valueMap.m_textures.find(key);
+	map<string, LampTexture*>::iterator iter = m_valueMap.m_textures.find(key);
 	if (iter != m_valueMap.m_textures.end())
 	{
 		return iter->second;

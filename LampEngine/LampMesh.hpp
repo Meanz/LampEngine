@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "LampSkeleton.hpp"
 
 namespace LampProject
 {
@@ -15,10 +16,16 @@ namespace LampProject
 
 	struct LampMeshData
 	{
+		//Simple position data
 		vec3* positions;
 		vec3* normals;
 		vec2* uvs;
 		uint32_t* indices;
+
+		//Bone assignments, they are 4 * numVertices
+		GLint* boneAssignments;
+		GLfloat* weights;
+
 		int numIndices;
 		int numVertices;
 
@@ -27,6 +34,8 @@ namespace LampProject
 			normals(0),
 			uvs(0),
 			indices(0),
+			boneAssignments(0),
+			weights(0),
 			numIndices(0),
 			numVertices(0)
 		{}
@@ -48,7 +57,7 @@ namespace LampProject
 	class LampMesh
 	{
 
-	private:
+	protected:
 		//Whether we need to compile or not
 		//if this is flagged, the Mesh will be compiled the next frame
 		//by the GL thread
@@ -63,7 +72,7 @@ namespace LampProject
 		LampMeshCompileMode m_compileMode;
 
 		//VBO id's
-		GLuint m_vboPositions, m_vboNormals, m_vboUVs, m_vboIndices;
+		GLuint m_vboPositions, m_vboNormals, m_vboUVs, m_vboIndices, m_vboBoneAssignments, m_vboWeights;
 
 		//VAO id
 		GLuint m_vao;
@@ -104,34 +113,10 @@ namespace LampProject
 		bool isCompiled();
 		
 		//Compiles this mesh
-		void compile();
+		virtual void compile();
 
 		//Renders this mesh
 		virtual void render();
 	};
-
-
-	//The idea here is that a skeletal mesh is an extension of the "mesh"
-	//Basically the old, compile functions and such of the mesh are still
-	//Contained in the "Mesh" class, but the new things such as the Skeleton
-	//Is now being handled with the mesh, so for example
-	//On draw call the SkeletalMesh overrides the draw function of the mesh
-	//And deals with it appropriately
-	class LampSkeletalMesh : public LampMesh
-	{
-
-	private:
-
-	public:
-
-
-		//HMm
-		virtual void render()
-		{
-
-		}
-
-	};
-
 
 }

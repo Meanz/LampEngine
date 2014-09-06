@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LampEngine", "LampEngine\LampEngine.vcxproj", "{75AE4E1E-7374-4300-B690-4ADBD4DBFE95}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProjectStone", "ProjectStone\ProjectStone.vcxproj", "{38F2437A-33FB-4E6D-8661-F6AA7E4FCC4F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75AE4E1E-7374-4300-B690-4ADBD4DBFE95} = {75AE4E1E-7374-4300-B690-4ADBD4DBFE95}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75AE4E1E-7374-4300-B690-4ADBD4DBFE95}.Debug|Win32.ActiveCfg = Debug|Win32
+		{75AE4E1E-7374-4300-B690-4ADBD4DBFE95}.Debug|Win32.Build.0 = Debug|Win32
+		{75AE4E1E-7374-4300-B690-4ADBD4DBFE95}.Release|Win32.ActiveCfg = Release|Win32
+		{75AE4E1E-7374-4300-B690-4ADBD4DBFE95}.Release|Win32.Build.0 = Release|Win32
+		{38F2437A-33FB-4E6D-8661-F6AA7E4FCC4F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{38F2437A-33FB-4E6D-8661-F6AA7E4FCC4F}.Debug|Win32.Build.0 = Debug|Win32
+		{38F2437A-33FB-4E6D-8661-F6AA7E4FCC4F}.Release|Win32.ActiveCfg = Release|Win32
+		{38F2437A-33FB-4E6D-8661-F6AA7E4FCC4F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal

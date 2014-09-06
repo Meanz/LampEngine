@@ -72,9 +72,23 @@ void LampEngine::start()
 
 	if (m_pWrapper->init())
 	{
+
+		//
+		//Initialize default shader
+		Lamp::getAssetManager().loadShaderProgram("default", "./data/shaders/test.lshader");
+		Lamp::getAssetManager().loadShaderProgram("skinned", "./data/shaders/skinned.lshader");
+
+		LampMaterial* pMaterial = Lamp::getAssetManager().getMaterial("default");
+		pMaterial->setShader(Lamp::getAssetManager().getShaderProgram("default"));
+
+		pMaterial = Lamp::getAssetManager().createMaterial("skinned");
+		pMaterial->setShader(Lamp::getAssetManager().getShaderProgram("skinned"));
+
 		//Send preInit event!
 		m_pApplication->onInit();
 
+
+		//
 		loop(); //Start the loop!
 	}
 

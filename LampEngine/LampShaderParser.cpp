@@ -43,7 +43,7 @@ int LUA_setShaderVersion(LuaState L)
 
 	//Get the number that is on top! :D
 	int i = lua.get<int>(-1);
-	printf("Version: %d\n", i);
+	//printf("Version: %d\n", i);
 	LampShaderParser* parser = lua.getGlobalPtr<LampShaderParser>("ptrLampShaderParser");
 	parser->setVersion(i);
 
@@ -58,7 +58,7 @@ void addShader(std::string path, LampShaderType type, LampShaderParser& parser)
 	{
 		LampShader* pShader = new LampShader(type);
 		pShader->setSource(readResult.fileContents);
-		printf("Read file %s\n", path.c_str());
+		//printf("Read file %s\n", path.c_str());
 		parser.addShader(pShader);
 	}
 	else
@@ -74,7 +74,7 @@ int LUA_addFragmentShader(LuaState L)
 	LampLua lua = getLua(L);
 
 	int argc = lua.getTop();
-	printf("argc: addfs %d\n", argc);
+	//printf("argc: addfs %d\n", argc);
 	if (argc != 1)
 	{
 		//Report error
@@ -98,7 +98,7 @@ int LUA_addVertexShader(LuaState L)
 	LampLua lua = getLua(L);
 
 	int argc = lua.getTop();
-	printf("argc: addvs %d\n", argc);
+	//printf("argc: addvs %d\n", argc);
 	if (argc != 1)
 	{
 		//Report error
@@ -219,7 +219,7 @@ bool LampShaderParser::parse()
 		std::string _tempShaderSource = "#version ";
 		_tempShaderSource.append(std::to_string(m_shaderVersion));
 		_tempShaderSource.append("\n");
-		printf("New weird string: %s", _tempShaderSource.c_str());
+		//printf("New weird string: %s", _tempShaderSource.c_str());
 		_tempShaderSource.append(pShader.getSource());
 
 		//That should do the trick, hehe
@@ -272,8 +272,16 @@ failJmp:
 			std::string uniformType = uniformTypeName.substr(0, idx);
 			std::string uniformName = uniformTypeName.substr(idx + 1);
 
-			printf("type: '%s'\n", uniformType.c_str());
-			printf("name: '%s'\n", uniformName.c_str());
+			//is there a [ there for array?
+			std::size_t hasBrace = uniformName.find('[');
+
+			if (hasBrace != string::npos)
+			{
+				uniformName = uniformName.substr(0, hasBrace);
+			}
+
+			//printf("type: '%s'\n", uniformType.c_str());
+			//printf("name: '%s'\n", uniformName.c_str());
 
 			//Push uniform name and type to the map, and push -1 for the location just for alloc's sake
 			m_shaderMap.uniformNames.push_back(uniformName);

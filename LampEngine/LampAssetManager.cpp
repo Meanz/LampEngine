@@ -15,7 +15,6 @@ m_texIdCounter(0)
 
 	//Load our default material
 	loadMaterial("default", "./data/materials/default.lmaterial");
-
 }
 
 LampAssetManager::~LampAssetManager()
@@ -156,6 +155,7 @@ LampShaderProgram* LampAssetManager::loadShaderProgram(std::string shaderId, std
 		}
 		else
 		{
+			printf("Could not load shader %s\n", shaderFilePath.c_str());
 			delete pShaderProgram;
 			pShaderProgram = NULL;
 		}

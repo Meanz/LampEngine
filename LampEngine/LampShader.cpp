@@ -246,10 +246,10 @@ bool LampShaderProgram::compile(LampShaderMap shaderMap)
 
 
 	//Error checking
-	printf("########## SHADER LOG ##########\n");
 	if (compileFailed)
 	{
 		m_isCompiled = false;
+		printf("########## SHADER LOG ##########\n");
 		printf("Unable to link program: \n%s\n", m_errorString.c_str());
 		std::cin.get();
 	}
@@ -324,6 +324,14 @@ void LampShaderProgram::updateUniforms(LampRenderer& renderer, LampMaterial* pMa
 				//Find texture through material
 				//tex = pMaterial->getTexture(map)
 				//tex->bind();
+			}
+			else if (uniformName == "R_Bones")
+			{
+				vector<mat4*>& skinningMatrices = pMaterial->getMatrix4Array(uniformName);
+				if (skinningMatrices.size() > 0)
+				{
+					glUniformMatrix4fv(uniformLocation, skinningMatrices.size(), GL_FALSE, glm::value_ptr(*skinningMatrices[0]));
+				}	
 			}
 		}
 		else if (uniformName.substr(0, 2) == "M_")

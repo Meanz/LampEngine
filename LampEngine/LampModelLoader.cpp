@@ -105,11 +105,22 @@ LampGameObject* LampModelLoader::loadModel(string modelPath)
 					}
 					else
 					{
-						printf("WHAT\n");
+						throw new std::runtime_error("Invalid type flag in " + modelPath);
 					}
 					if (pMesh != NULL)
 					{
 						pMesh->setMaterial(Lamp::getAssetManager().createMaterial());
+						//Do we have a skeleton?
+						if (skeletonNode != NULL)
+						{
+							pMesh->getMaterial()->setShader(Lamp::getAssetManager().getShaderProgram("skinned"));
+							pMesh->setCompileMode(LampMeshCompileMode::COMPILE_LEGACY);
+						}
+						else
+						{
+							pMesh->getMaterial()->setShader(Lamp::getAssetManager().getShaderProgram("default"));
+						}
+						
 					}
 				}
 
@@ -129,8 +140,11 @@ LampGameObject* LampModelLoader::loadModel(string modelPath)
 
 				if (skeletonNode != NULL)
 				{
-					char* nodeName = textureNode->name();
-					string nodeValue = basedir + textureNode->value();
+					char* nodeName = skeletonNode->name();
+					string nodeValue = basedir + skeletonNode->value();
+
+					LampMWMLoader loader(nodeValue);
+					pSkeleton = loader.loadSkeleton();
 				}
 
 				//Seing as we can have several animations associated with this model

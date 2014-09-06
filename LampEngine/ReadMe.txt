@@ -17,8 +17,8 @@ Planned features:
 
 * Defered Rendering
 	I plan to implement this rendering technique and to play with it's capabilities.
-	Not sure if I am going to add a second renderer for Forward Rendering, I don't think that should be to hard
-	since most of the actions that Defered Rendering does is just shaders.
+	Not sure if I am going to add a second renderer for Forward Rendering, I don't think that should 
+	be to hard since most of the actions that Defered Rendering does is just shaders.
 
 * Screen Space Ambient Occlusion ( SSAO )
 	I really like how SSAO can change the feel of a scene, so I will be having a go at this.
@@ -26,3 +26,12 @@ Planned features:
 
 I will be adding/removing information here as time progresses.
 I might be posting some progress videos on youtube or something, I don't know just yet.
+
+Dependencies:
+
+freetype-2.4.0
+SDL2
+glew-1.10.0
+glm
+lua-5.2.3
+

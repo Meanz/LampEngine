@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LampMWMLoader.hpp"
 #include "LampAnimation.hpp"
+#include "LampSkeletalMesh.hpp"
 
 LampMWMLoader::LampMWMLoader(std::string filePath)
 {
@@ -10,7 +11,7 @@ LampMWMLoader::LampMWMLoader(std::string filePath)
 LampMWMLoader::~LampMWMLoader()
 {
 	//Delete our buffer
-	
+
 }
 
 inline vec3 LampMWMLoader::getVec3()
@@ -25,7 +26,7 @@ inline vec2 LampMWMLoader::getVec2()
 {
 	float x = m_buffer->getFloat();
 	float y = m_buffer->getFloat();
-	return vec2(x,y);
+	return vec2(x, y);
 }
 
 LampMesh* LampMWMLoader::loadModel()
@@ -48,9 +49,9 @@ LampMesh* LampMWMLoader::loadModel()
 
 
 	short version = m_buffer->getShort();
-	
+
 	std::string meshName = m_buffer->getString();
-	
+
 	printf("Mesh: %s ... Version: %i\n", meshName.c_str(), version);
 
 	short numVertices = m_buffer->getShort();
@@ -64,7 +65,7 @@ LampMesh* LampMWMLoader::loadModel()
 	vec3* positions = new vec3[numVertices];
 	vec3* normals = NULL;
 	vec2* uvs = NULL;
-	
+
 	//Positions
 	for (short i = 0; i < numVertices; i++)
 	{
@@ -99,26 +100,44 @@ LampMesh* LampMWMLoader::loadModel()
 	}
 
 	//Bone assignments
+
+	GLfloat* weights = NULL;
+	GLint* boneAssignments = NULL;
 	if (hasBoneAssignments)
 	{
-		
+		//Not sure what this is supposed to mean o.O
 		short numBones = m_buffer->getShort();
-
 		for (short i = 0; i < numBones; i++)
 		{
-			//bones[i] = m_buffer->getString();
+			m_buffer->getString();
 		}
 
 		//Default
-		short weightsPerBone = 4;
-		for (short i = 0; i < numVertices; i++)
+		short weightsPerBone = m_buffer->getShort();
+		if (weightsPerBone != 4)
 		{
+			printf("Not 4! =O %i\n", weightsPerBone);
+		}
+		//weightsPerBone ignore it, engine defaults to 4
+		weights = new GLfloat[numVertices * 4];
+		boneAssignments = new GLint[numVertices * 4];
 
-
-			for (short j = 0; j < weightsPerBone; j++)
+		for (int i = 0; i < numVertices; i++)
+		{
+			for (int j = 0; j < weightsPerBone; j++)
 			{
-				//int boneId = m_buffer->getInt();
-				//float weight = m_buffer->getDouble();
+				if ((i *weightsPerBone + j) > numVertices * 4){
+					printf("DAAAANGER!!!!!\n");
+				}
+
+				int boneAssignment = m_buffer->getInt();
+				float weight = m_buffer->getFloat();
+
+				if (weight < 0.00001)
+					weight = 0;
+
+				boneAssignments[(i * weightsPerBone) + j] = boneAssignment;
+				weights[(i * weightsPerBone) + j] = weight;
 			}
 		}
 
@@ -126,13 +145,18 @@ LampMesh* LampMWMLoader::loadModel()
 
 	LampMesh* pMesh = new LampMesh();
 	LampMeshData* pMeshData = pMesh->getMeshData();
-
 	pMeshData->positions = positions;
 	pMeshData->normals = normals;
 	pMeshData->uvs = uvs;
 	pMeshData->indices = indices;
 	pMeshData->numVertices = numVertices;
 	pMeshData->numIndices = numIndices;
+	if (hasBoneAssignments)
+	{
+		pMeshData->weights = weights;
+		pMeshData->boneAssignments = boneAssignments;
+	}
+
 
 	return pMesh;
 }
@@ -242,7 +266,7 @@ LampSkeleton* LampMWMLoader::loadSkeleton()
 	vector<_bone> _bones = bones;
 	vector<_bone> finished;
 
-	int idx = 0; 
+	int idx = 0;
 	while (bones.size() > 0)
 	{
 		bool didFindParent = false;
@@ -281,7 +305,7 @@ LampSkeleton* LampMWMLoader::loadSkeleton()
 		{
 			assert(false);
 		}
-			
+
 	}
 
 	//We have a sorted bone list... 
@@ -304,7 +328,7 @@ LampSkeleton* LampMWMLoader::loadSkeleton()
 		//Create our matrix
 		mat4 positionMatrix = glm::translate(mat4(1.0f), f.pos) * glm::mat4_cast(glm::angleAxis(f.ang, f.rot)); //Ignore scaling :D
 
-		b.identityMatrix = positionMatrix;
+		b.localTransform = positionMatrix;
 
 		lbones.push_back(b);
 	}

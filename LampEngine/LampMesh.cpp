@@ -29,6 +29,11 @@ LampMesh::~LampMesh()
 	}
 }
 
+void LampMesh::setCompileMode(LampMeshCompileMode lmcm)
+{
+	m_compileMode = lmcm;
+}
+
 LampMaterial* LampMesh::getMaterial()
 {
 	return m_material;
@@ -129,6 +134,20 @@ void LampMesh::compile()
 			glBufferData(GL_ARRAY_BUFFER, m_meshData.numVertices * sizeof(vec2), m_meshData.uvs, GL_STATIC_DRAW);
 		}
 
+		if (m_meshData.boneAssignments > 0)
+		{
+			glGenBuffers(1, &m_vboBoneAssignments);
+			glBindBuffer(GL_ARRAY_BUFFER, m_vboBoneAssignments);
+			glBufferData(GL_ARRAY_BUFFER, m_meshData.numVertices * 4 * sizeof(GLint), m_meshData.boneAssignments, GL_STATIC_DRAW);
+		}
+
+		if (m_meshData.weights > 0)
+		{
+			glGenBuffers(1, &m_vboWeights);
+			glBindBuffer(GL_ARRAY_BUFFER, m_vboWeights);
+			glBufferData(GL_ARRAY_BUFFER, m_meshData.numVertices * 4 * sizeof(GLfloat), m_meshData.weights, GL_STATIC_DRAW);
+		}
+
 		if (m_meshData.indices > 0)
 		{
 			glGenBuffers(1, &m_vboIndices);
@@ -167,6 +186,22 @@ void LampMesh::compile()
 				glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(vec2), 0);
 			}
 
+			if (m_meshData.boneAssignments > 0)
+			{
+				glEnableVertexAttribArray(4);
+				glBindBuffer(GL_ARRAY_BUFFER, m_vboBoneAssignments);
+				//index, size, type, normalized, stride, pointer
+				glVertexAttribPointer(4, 4, GL_FLOAT, false, sizeof(GLint) * 4, 0);
+			}
+
+			if (m_meshData.weights > 0)
+			{
+				glEnableVertexAttribArray(5);
+				glBindBuffer(GL_ARRAY_BUFFER, m_vboWeights);
+				//index, size, type, normalized, stride, pointer
+				glVertexAttribPointer(5, 4, GL_FLOAT, false, sizeof(GLfloat) * 4, 0);
+			}
+
 			if (m_meshData.indices > 0)
 			{
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vboIndices);
@@ -197,14 +232,37 @@ void LampMesh::render()
 				{
 					int index = m_meshData.indices[i];
 
-					if (m_meshData.uvs > 0)
-						glTexCoord2f(m_meshData.uvs[index].x, m_meshData.uvs[index].y);
+					//Does this thing have bone assignments? if so this is a skinned mesh! oh dear!
+					if (m_meshData.boneAssignments > 0)
+					{
+						//Get the skinning matrices
+						vector<mat4*>& skinningMatrices = m_material->getMatrix4Array("R_Bones");
 
-					if (m_meshData.normals > 0)
-						glNormal3f(m_meshData.normals[index].x, m_meshData.normals[index].y, m_meshData.normals[index].z);
+						mat4 boneTransform(1.0f);
+						for (int j = 0; j < 4; j++)
+						{
+							if (m_meshData.boneAssignments[(index * 4) + j] < 0)
+								continue;
 
-					if (m_meshData.positions > 0)
-						glVertex3f(m_meshData.positions[index].x, m_meshData.positions[index].y, m_meshData.positions[index].z);
+							//We need to obtain the skinned matrices somehow :o!?
+							boneTransform += *skinningMatrices[m_meshData.boneAssignments[(index * 4) + j]] * m_meshData.weights[(index * 4) + j];
+						}
+						vec4 skinnedPosition = boneTransform * vec4(m_meshData.positions[index].x, m_meshData.positions[index].y, m_meshData.positions[index].z, 1.0f);
+
+						glVertex3v(skinnedPosition);
+					}
+					else
+					{
+						if (m_meshData.uvs > 0)
+							glTexCoord2f(m_meshData.uvs[index].x, m_meshData.uvs[index].y);
+
+						if (m_meshData.normals > 0)
+							glNormal3f(m_meshData.normals[index].x, m_meshData.normals[index].y, m_meshData.normals[index].z);
+
+						if (m_meshData.positions > 0)
+							glVertex3f(m_meshData.positions[index].x, m_meshData.positions[index].y, m_meshData.positions[index].z);
+
+					}
 
 				}
 			}
@@ -221,11 +279,15 @@ void LampMesh::render()
 		else if (m_compileMode == LampMeshCompileMode::COMPILE_VAO)
 		{
 			//Try to use our shader :p
-			LampShaderProgram* pShaderProgram = Lamp::getAssetManager().getShaderProgram("testShader");
+			LampShaderProgram* pShaderProgram = m_material->getShader();
 			if (pShaderProgram != NULL)
 			{
 				pShaderProgram->use();
 				pShaderProgram->updateUniforms(*Lamp::getEngine().getRenderer(), m_material);
+			}
+			else
+			{
+				return; //UGH!
 			}
 
 			glBindVertexArray(m_vao);

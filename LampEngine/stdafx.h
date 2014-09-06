@@ -14,6 +14,7 @@
 //Cstring
 #include <string>
 #include <vector>
+#include <map>
 
 //Windows stuff
 #include <Windows.h>
@@ -41,6 +42,7 @@
 //Some cool things
 using std::vector;
 using std::string;
+using std::map;
 
 //Utility class
 #include "LampUtil.hpp"
@@ -50,6 +52,9 @@ using std::string;
 
 //Our transformation ckass
 #include "LampTransform.hpp"
+
+//Our helper class
+#include "LampHelpers.hpp"
 
 //A configuration structure for the lamp engine
 struct LampConfig {
